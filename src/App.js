@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import API from "./adapters/API";
-
+const AUTH = "Authorization";
 class App extends React.Component {
   state = {
     user: undefined,
@@ -14,6 +14,7 @@ class App extends React.Component {
     API.validateUser().then(user => {
       this.setState({ user });
     });
+    this.fetchPlaylists();
   }
 
   signUp = user => {
@@ -27,6 +28,16 @@ class App extends React.Component {
   logOut = () => {
     API.clearToken();
     this.setState({ user: undefined });
+  };
+
+  fetchPlaylists = () => {
+    fetch("http://localhost:3000/playlists", {
+      headers: {
+        ["Authorization"]: localStorage.token
+      }
+    })
+      .then(resp => resp.json())
+      .then(playlists => this.setState({ playlists: playlists }));
   };
 
   // submitPost = post => {
@@ -52,6 +63,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar
+          playlists={this.state.playlists}
           user={this.state.user}
           signUp={this.signUp}
           logIn={this.logIn}

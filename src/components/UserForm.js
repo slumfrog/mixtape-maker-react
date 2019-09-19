@@ -12,6 +12,7 @@ const SignupForm = ({ submit, header }) => {
         submit({ email, password, spotify_id });
         setEmail("");
         setPassword("");
+        setSpotifyId("");
       }}
     >
       <span>{header}</span>
@@ -29,16 +30,13 @@ const SignupForm = ({ submit, header }) => {
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
-
-      {true && (
-        <input
-          placeholder="SpotifyID"
-          type="spotify_id"
-          name="spotify_id"
-          value={spotify_id}
-          onChange={e => setSpotifyId(e.target.value)}
-        />
-      )}
+      <input
+        placeholder="SpotifyID"
+        type="spotify_id"
+        name="spotify_id"
+        value={spotify_id}
+        onChange={e => setSpotifyId(e.target.value)}
+      />
       <input type="submit" />
     </form>
   );
