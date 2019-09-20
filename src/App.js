@@ -34,7 +34,6 @@ class App extends React.Component {
   };
 
   fetchPlaylists = () => {
-    debugger;
     fetch("http://localhost:3000/playlists", {
       headers: {
         ["Authorization"]: localStorage.token

@@ -10,7 +10,18 @@ const Navbar = ({ user, signUp, logIn, logOut, playlists }) => {
           <button onClick={logOut}>Log out</button>
           <div>
             {playlists.length > 0 &&
-              playlists.map(playlist => <div>{playlist}</div>)}
+              playlists.map(playlist => (
+                <div>
+                  {playlist.name}
+                  {playlist.id}
+                  {playlist.tracks.map(track => (
+                    <div>
+                      {track.name}
+                      {track.preview_url}
+                    </div>
+                  ))}
+                </div>
+              ))}
           </div>
         </div>
       ) : (
