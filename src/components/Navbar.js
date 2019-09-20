@@ -4,14 +4,13 @@ import UserForm from "./UserForm";
 const Navbar = ({ user, signUp, logIn, logOut, playlists }) => {
   return (
     <nav>
-      {user ? (
+      {user && !user.error ? (
         <div>
           <div>You are signed in as: {user.spotify_id}</div>
           <button onClick={logOut}>Log out</button>
           <div>
-            {playlists.map(playlist => (
-              <div>{playlist}</div>
-            ))}
+            {playlists.length > 0 &&
+              playlists.map(playlist => <div>{playlist}</div>)}
           </div>
         </div>
       ) : (

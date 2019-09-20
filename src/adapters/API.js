@@ -14,6 +14,7 @@ const handleServerError = response => {
 
 const saveToken = data => {
   localStorage.setItem("token", data.token);
+  console.log(data.token);
   return data.user;
 };
 
@@ -49,7 +50,6 @@ const logIn = user =>
 const validateUser = () => {
   if (!localStorage.getItem("token"))
     return Promise.resolve({ error: "no token" });
-
   return fetch(validateUrl, {
     headers: constructHeaders()
   })

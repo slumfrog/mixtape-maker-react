@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import API from "./adapters/API";
 const AUTH = "Authorization";
+
 class App extends React.Component {
   state = {
     user: undefined,
@@ -11,10 +12,11 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    API.validateUser().then(user => {
-      this.setState({ user });
-    });
-    this.fetchPlaylists();
+    API.validateUser()
+      .then(user => {
+        this.setState({ user });
+      })
+      .then(this.fetchPlaylists());
   }
 
   signUp = user => {
@@ -28,9 +30,11 @@ class App extends React.Component {
   logOut = () => {
     API.clearToken();
     this.setState({ user: undefined });
+    this.setState({ playlists: [] });
   };
 
   fetchPlaylists = () => {
+    debugger;
     fetch("http://localhost:3000/playlists", {
       headers: {
         ["Authorization"]: localStorage.token
@@ -56,8 +60,6 @@ class App extends React.Component {
   //       });
   //     });
   // };
-
-  // if user.id is present, log us in, otherwise error is present, just show navbar
 
   render() {
     return (
