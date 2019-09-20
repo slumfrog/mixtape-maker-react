@@ -15,10 +15,7 @@ const Navbar = ({ user, signUp, logIn, logOut, playlists }) => {
                   {playlist.name}
                   {playlist.id}
                   {playlist.tracks.map(track => (
-                    <div>
-                      {track.name}
-                      {track.preview_url}
-                    </div>
+                    <div>{track.preview_url}</div>
                   ))}
                 </div>
               ))}
