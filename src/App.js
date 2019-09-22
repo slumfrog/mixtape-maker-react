@@ -2,13 +2,20 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Create from "./components/Create";
+import Gallery from "./components/Gallery";
+import About from "./components/About";
+import CreatePlaylist from "./components/CreatePlaylist";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import API from "./adapters/API";
-const AUTH = "Authorization";
 
 class App extends React.Component {
   state = {
     user: undefined,
-    playlists: []
+    playlists: [],
+    selected_id: [],
+    selected_playlist: []
   };
 
   componentDidMount() {
@@ -16,7 +23,8 @@ class App extends React.Component {
       .then(user => {
         this.setState({ user });
       })
-      .then(this.fetchPlaylists());
+      .then(this.fetchPlaylists())
+      .then(this.fetchPlaylist());
   }
 
   signUp = user => {
@@ -31,6 +39,11 @@ class App extends React.Component {
     API.clearToken();
     this.setState({ user: undefined });
     this.setState({ playlists: [] });
+    this.setState({ selected_playlist: [] });
+  };
+
+  handlePlaylistClick = props => {
+    this.setState({ selected_id: props });
   };
 
   fetchPlaylists = () => {
@@ -43,34 +56,46 @@ class App extends React.Component {
       .then(playlists => this.setState({ playlists: playlists }));
   };
 
-  // submitPost = post => {
-  //   API.postPost(post)
-  //     .then(data =>
-  //       this.setState({
-  //         user: {
-  //           ...this.state.user,
-  //           posts: [...this.state.user.posts, data.post]
-  //         }
-  //       })
-  //     )
-  //     .catch(errorPromise => {
-  //       errorPromise.then(data => {
-  //         this.setState({ errors: data.errors });
-  //       });
-  //     });
-  // };
+  fetchPlaylist = () => {
+    fetch(`http://localhost:3000/playlist`, {
+      headers: {
+        ["Authorization"]: localStorage.token
+      }
+    })
+      .then(resp => resp.json())
+      .then(selected_playlist =>
+        this.setState({ selected_playlist: selected_playlist })
+      );
+  };
 
   render() {
     return (
-      <div className="App">
-        <Navbar
-          playlists={this.state.playlists}
-          user={this.state.user}
-          signUp={this.signUp}
-          logIn={this.logIn}
-          logOut={this.logOut}
-        />
-      </div>
+      <Router>
+        <div className="App">
+          <Navbar
+            user={this.state.user}
+            signUp={this.signUp}
+            logIn={this.logIn}
+            logOut={this.logOut}
+          />
+          <Switch>
+            <Create
+              path="/"
+              exact
+              component={Create}
+              playlists={this.state.playlists}
+              handlePlaylistClick={this.handlePlaylistClick}
+            />
+            <CreatePlaylist
+              path="/create/:id"
+              component={CreatePlaylist}
+              selectedPlaylist={this.state.selected_playlist}
+            />
+            <Gallery path="/gallery" exact component={Gallery} />
+            <About path="/about" exact component={About} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

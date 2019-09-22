@@ -1,25 +1,25 @@
 import React from "react";
 import UserForm from "./UserForm";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ user, signUp, logIn, logOut, playlists }) => {
+const Navbar = ({ user, signUp, logIn, logOut }) => {
   return (
     <nav>
       {user && !user.error ? (
         <div>
           <div>You are signed in as: {user.spotify_id}</div>
           <button onClick={logOut}>Log out</button>
-          <div>
-            {playlists.length > 0 &&
-              playlists.map(playlist => (
-                <div>
-                  {playlist.name}
-                  {playlist.id}
-                  {playlist.tracks.map(track => (
-                    <div>{track.preview_url}</div>
-                  ))}
-                </div>
-              ))}
-          </div>
+          <ul className="nav-links">
+            <Link to="/">
+              <li>Create</li>
+            </Link>
+            <Link to="/gallery">
+              <li>Gallery</li>
+            </Link>
+            <Link to="/about">
+              <li>About</li>
+            </Link>
+          </ul>
         </div>
       ) : (
         <>
