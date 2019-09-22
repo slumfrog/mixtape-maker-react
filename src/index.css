@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Mansalva&display=swap");
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -15,3 +17,41 @@ code {
 .text-wrap {
   word-wrap: break-word;
 }
+
+/* old meme styling */
+
+.tape {
+  position: relative;
+  width: 600px;
+  margin: auto;
+}
+
+.tape > img {
+  width: 100%;
+}
+
+.tape > h2 {
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 15px 0;
+  padding: 0 5px;
+  font-family: "Mansalva", cursive;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  color: 000000;
+  letter-spacing: 1px;
+}
+
+.tape > .top {
+  top: 100px;
+}
+
+.meme-form > input {
+  width: 45%;
+  height: 40px;
+}
+
+/* old meme styling */

@@ -2,10 +2,10 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Create from "./components/Create";
+import Create from "./containers/Create";
 import Gallery from "./components/Gallery";
 import About from "./components/About";
-import CreatePlaylist from "./components/CreatePlaylist";
+import CreatePlaylist from "./containers/CreatePlaylist";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import API from "./adapters/API";
@@ -23,8 +23,7 @@ class App extends React.Component {
       .then(user => {
         this.setState({ user });
       })
-      .then(this.fetchPlaylists())
-      .then(this.fetchPlaylist());
+      .then(this.fetchPlaylists());
   }
 
   signUp = user => {
@@ -44,10 +43,11 @@ class App extends React.Component {
 
   handlePlaylistClick = props => {
     this.setState({ selected_id: props });
+    this.fetchPlaylist(props);
   };
 
   fetchPlaylists = () => {
-    fetch("http://localhost:3000/playlists", {
+    fetch("http://localhost:3000/playlists/", {
       headers: {
         ["Authorization"]: localStorage.token
       }
@@ -56,8 +56,8 @@ class App extends React.Component {
       .then(playlists => this.setState({ playlists: playlists }));
   };
 
-  fetchPlaylist = () => {
-    fetch(`http://localhost:3000/playlist`, {
+  fetchPlaylist = props => {
+    fetch(`http://localhost:3000/playlist/${props}`, {
       headers: {
         ["Authorization"]: localStorage.token
       }
