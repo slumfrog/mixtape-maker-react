@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Create from "./containers/Playlists";
+import Playlists from "./containers/Playlists";
 import Gallery from "./components/Gallery";
 import About from "./components/About";
 import CreateMixtape from "./containers/CreateMixtape";
@@ -14,7 +14,6 @@ class App extends React.Component {
   state = {
     user: undefined,
     playlists: [],
-    selectedId: [],
     selectedPlaylist: null
   };
 
@@ -56,18 +55,6 @@ class App extends React.Component {
       .then(playlists => this.setState({ playlists: playlists }));
   };
 
-  fetchPlaylist = id => {
-    fetch(`http://localhost:3000/playlist/${id}`, {
-      headers: {
-        ["Authorization"]: localStorage.token
-      }
-    })
-      .then(resp => resp.json())
-      .then(selectedPlaylist =>
-        this.setState({ selectedPlaylist: selectedPlaylist })
-      );
-  };
-
   selectPlaylist = playlist =>
     this.setState({ selectedPlaylist: playlist }, () =>
       this.props.history.push(`/create/${playlist.id}`)
@@ -83,10 +70,10 @@ class App extends React.Component {
           logOut={this.logOut}
         />
         <Switch>
-          <Create
+          <Playlists
             path="/"
             exact
-            component={Create}
+            component={Playlists}
             playlists={this.state.playlists}
             selectPlaylist={this.selectPlaylist}
           />

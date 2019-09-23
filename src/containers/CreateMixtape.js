@@ -8,7 +8,8 @@ class CreateMixtape extends React.Component {
     this.state = {
       trackComments: [],
       tapeText: "",
-      tapeImage: ""
+      tapeImage: "",
+      selectedPlaylist: []
     };
   }
 
@@ -32,37 +33,50 @@ class CreateMixtape extends React.Component {
     });
   };
 
-  handleTrackComment = event => {
-    const { id, value } = event.target;
-    const trackComment = { id: id, comment: value };
-    // get current comments
-    let currentComments = this.state.trackComments;
+  // handleTrackComment = event => {
+  //   const { id, value } = event.target;
+  //   const trackComment = { id: id, comment: value };
+  //   // get current comments
+  //   let currentComments = this.state.trackComments;
 
-    // if the comment song id already exists, find it and declare it
-    let existingComment = currentComments.find(
-      trackComment => trackComment.id == id
-    );
-    debugger;
-    // find the the Index of the existing comment
-    let existingCommentIndex = this.state.trackComments.findIndex(
-      trackComment => trackComment.id == id
-    );
+  //   // if the comment song id already exists, find it and declare it
+  //   let existingComment = currentComments.find(
+  //     trackComment => trackComment.id == id
+  //   );
+  //   // find the the Index of the existing comment
+  //   let existingCommentIndex = this.state.trackComments.findIndex(
+  //     trackComment => trackComment.id == id
+  //   );
 
-    //in the currentComments, replace 1 element, at the existingComment index with the new track comment
-    let updatedComments = currentComments.splice(
-      existingCommentIndex,
-      1,
-      trackComment
-    );
+  //   //in the currentComments, replace 1 element, at the existingComment index with the new track comment
+  //   let updatedComments = currentComments.splice(
+  //     existingCommentIndex,
+  //     1,
+  //     trackComment
+  //   );
 
-    this.setState({
-      trackComments: [...updatedComments]
-    });
-  };
+  //   this.setState({
+  //     trackComments: [...updatedComments]
+  //   });
+  // };
 
   componentDidMount() {
-    this.handlePopulateTrackComments();
+    this.fetchPlaylist(this.props.computedMatch.params.id);
+    // this.handlePopulateTrackComments();
   }
+
+  fetchPlaylist = selectedPlaylist => {
+    debugger;
+    fetch(`http://localhost:3000/playlist/${selectedPlaylist}`, {
+      headers: {
+        ["Authorization"]: localStorage.token
+      }
+    })
+      .then(resp => resp.json())
+      .then(selectedPlaylist => {
+        this.setState({ selectedPlaylist: selectedPlaylist });
+      });
+  };
 
   render() {
     return (
@@ -73,7 +87,7 @@ class CreateMixtape extends React.Component {
           tapeText={this.state.tapeText}
         />
         <Tracks
-          selectedPlaylist={this.props.selectedPlaylist.tracks}
+          selectedPlaylist={this.state.selectedPlaylist}
           handleTrackComment={this.handleTrackComment}
           trackComment={this.trackComment}
           handlePopulateTrackComments={this.handlePopulateTrackComments}
