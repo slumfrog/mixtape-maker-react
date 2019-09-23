@@ -6,7 +6,7 @@ import Create from "./containers/Playlists";
 import Gallery from "./components/Gallery";
 import About from "./components/About";
 import CreateMixtape from "./containers/CreateMixtape";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 
 import API from "./adapters/API";
 
@@ -14,8 +14,8 @@ class App extends React.Component {
   state = {
     user: undefined,
     playlists: [],
-    selected_id: [],
-    selected_playlist: []
+    selectedId: [],
+    selectedPlaylist: null
   };
 
   componentDidMount() {
@@ -38,11 +38,11 @@ class App extends React.Component {
     API.clearToken();
     this.setState({ user: undefined });
     this.setState({ playlists: [] });
-    this.setState({ selected_playlist: [] });
+    this.setState({ selectedPlaylist: [] });
   };
 
   handlePlaylistClick = props => {
-    this.setState({ selected_id: props });
+    this.setState({ selectedId: props });
     this.fetchPlaylist(props);
   };
 
@@ -63,41 +63,44 @@ class App extends React.Component {
       }
     })
       .then(resp => resp.json())
-      .then(selected_playlist =>
-        this.setState({ selected_playlist: selected_playlist })
+      .then(selectedPlaylist =>
+        this.setState({ selectedPlaylist: selectedPlaylist })
       );
   };
 
+  selectPlaylist = playlist =>
+    this.setState({ selectedPlaylist: playlist }, () =>
+      this.props.history.push(`/create/${playlist.id}`)
+    );
+
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Navbar
-            user={this.state.user}
-            signUp={this.signUp}
-            logIn={this.logIn}
-            logOut={this.logOut}
+      <div className="App">
+        <Navbar
+          user={this.state.user}
+          signUp={this.signUp}
+          logIn={this.logIn}
+          logOut={this.logOut}
+        />
+        <Switch>
+          <Create
+            path="/"
+            exact
+            component={Create}
+            playlists={this.state.playlists}
+            selectPlaylist={this.selectPlaylist}
           />
-          <Switch>
-            <Create
-              path="/"
-              exact
-              component={Create}
-              playlists={this.state.playlists}
-              handlePlaylistClick={this.handlePlaylistClick}
-            />
-            <CreateMixtape
-              path="/create/:id"
-              component={CreateMixtape}
-              selectedPlaylist={this.state.selected_playlist}
-            />
-            <Gallery path="/gallery" exact component={Gallery} />
-            <About path="/about" exact component={About} />
-          </Switch>
-        </div>
-      </Router>
+          <CreateMixtape
+            path="/create/:id"
+            component={CreateMixtape}
+            selectedPlaylist={this.state.selectedPlaylist}
+          />
+          <Gallery path="/gallery" exact component={Gallery} />
+          <About path="/about" exact component={About} />
+        </Switch>
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

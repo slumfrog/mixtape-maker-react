@@ -10,10 +10,10 @@ const Tracks = props => {
             <form>
               <input
                 type="text"
-                comment={props.trackText}
+                value={props.trackComment}
                 id={track.id}
                 placeholder="Why I chose this song for you"
-                onChange={event => props.handleTrackText(event)}
+                onChange={event => props.handleTrackComment(event)}
               />
             </form>
           </div>

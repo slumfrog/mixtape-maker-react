@@ -1,14 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Playlists = ({ playlists, handlePlaylistClick }) => {
+const Playlists = ({ playlists, selectPlaylist }) => {
   return (
     <div>
       {playlists.map(playlist => (
         <div key={playlist.id}>
-          <h3 onClick={() => handlePlaylistClick(playlist.id)}>
-            <Link to={`/create/${playlist.id}`}>{playlist.name}</Link>
-          </h3>
+          <h3 onClick={() => selectPlaylist(playlist)}>{playlist.name}</h3>
         </div>
       ))}
     </div>
