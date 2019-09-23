@@ -2,10 +2,10 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Create from "./containers/Create";
+import Create from "./containers/Playlists";
 import Gallery from "./components/Gallery";
 import About from "./components/About";
-import CreatePlaylist from "./containers/CreatePlaylist";
+import CreateMixtape from "./containers/CreateMixtape";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import API from "./adapters/API";
@@ -56,8 +56,8 @@ class App extends React.Component {
       .then(playlists => this.setState({ playlists: playlists }));
   };
 
-  fetchPlaylist = props => {
-    fetch(`http://localhost:3000/playlist/${props}`, {
+  fetchPlaylist = id => {
+    fetch(`http://localhost:3000/playlist/${id}`, {
       headers: {
         ["Authorization"]: localStorage.token
       }
@@ -86,9 +86,9 @@ class App extends React.Component {
               playlists={this.state.playlists}
               handlePlaylistClick={this.handlePlaylistClick}
             />
-            <CreatePlaylist
+            <CreateMixtape
               path="/create/:id"
-              component={CreatePlaylist}
+              component={CreateMixtape}
               selectedPlaylist={this.state.selected_playlist}
             />
             <Gallery path="/gallery" exact component={Gallery} />
