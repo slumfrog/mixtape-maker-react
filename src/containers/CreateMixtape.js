@@ -7,7 +7,7 @@ class CreateMixtape extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trackComments: [],
+      finalMixtape: [],
       tapeText: "",
       selectedPlaylist: [],
       personalMessage: ""
@@ -31,27 +31,34 @@ class CreateMixtape extends React.Component {
     });
   };
 
-  handleTrackComment = event => {
+  handleTrackComment = (track, event) => {
     const { id, value } = event.target;
-    const trackComment = { id: id, comment: value };
+    const trackComment = {
+      track_id: id,
+      comment: value,
+      artist: track.artist,
+      duration: track.duration,
+      name: track.name,
+      preview: track.preview
+    };
     // get current comments
-    let currentComments = this.state.trackComments;
+
+    let currentComments = this.state.finalMixtape;
 
     // if the comment song id already exists, find it and declare it
     let existingComment = currentComments.find(
-      trackComment => trackComment.id == id
+      trackComment => trackComment.track_id == id
     );
     // find the the Index of the existing comment
-    let existingCommentIndex = this.state.trackComments.findIndex(
-      trackComment => trackComment.id == id
+    let existingCommentIndex = this.state.finalMixtape.findIndex(
+      trackComment => trackComment.track_id == id
     );
-
     //in the currentComments, replace 1 element, at the existingComment index with the new track comment
     currentComments.splice(existingCommentIndex, 1, trackComment);
 
     // const updatedComments = [currentComents.slice(0, existingCommentIndex),trackComment, currentComents.slice(existingCommentIndex + 1) ]
     this.setState({
-      trackComments: currentComments
+      finalMixtape: currentComments
     });
   };
 
@@ -80,10 +87,10 @@ class CreateMixtape extends React.Component {
       track_id: track.track_id,
       duration: track.duration,
       artist: track.artist,
-      comment: null
+      comment: ""
     }));
     this.setState({
-      trackComments: track_objs
+      finalMixtape: track_objs
     });
   };
 
@@ -103,7 +110,7 @@ class CreateMixtape extends React.Component {
           user_id: this.props.user.id, // get user id from token
           name: this.state.tapeText,
           personal_message: this.state.personalMessage,
-          tracks: this.state.trackComments
+          tracks: this.state.finalMixtape
         }
       })
     });

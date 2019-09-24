@@ -5,15 +5,15 @@ const Tracks = props => {
     <div>
       {props.selectedPlaylist.map(track => (
         <>
-          <div key={track.id}>
+          <div key={track.track_id}>
             {track.name}
             <form>
               <input
                 type="text"
                 value={props.trackComment}
-                id={track.id}
+                id={track.track_id}
                 placeholder="Why I chose this song for you"
-                onChange={event => props.handleTrackComment(event)}
+                onChange={event => props.handleTrackComment(track, event)}
               />
             </form>
           </div>
