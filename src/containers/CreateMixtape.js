@@ -75,8 +75,12 @@ class CreateMixtape extends React.Component {
 
   setTrackComments = () => {
     let track_objs = this.state.selectedPlaylist.map(track => ({
-      id: track.id,
-      comment: ""
+      name: track.name,
+      preview: track.preview,
+      track_id: track.track_id,
+      duration: track.duration,
+      artist: track.artist,
+      comment: null
     }));
     this.setState({
       trackComments: track_objs
@@ -95,8 +99,12 @@ class CreateMixtape extends React.Component {
         ["Authorization"]: localStorage.token
       },
       body: JSON.stringify({
-        name: this.state.tapeText,
-        personal_message: this.state.personalMessage
+        mixtape: {
+          user_id: this.props.user.id, // get user id from token
+          name: this.state.tapeText,
+          personal_message: this.state.personalMessage,
+          tracks: this.state.trackComments
+        }
       })
     });
   };

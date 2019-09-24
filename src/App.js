@@ -83,6 +83,7 @@ class App extends React.Component {
             path="/create/:id"
             component={CreateMixtape}
             selectedPlaylist={this.state.selectedPlaylist}
+            user={this.state.user}
           />
           <Gallery path="/gallery" exact component={Gallery} />
           <About path="/about" exact component={About} />
