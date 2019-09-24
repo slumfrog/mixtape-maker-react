@@ -6,6 +6,7 @@ import Playlists from "./containers/Playlists";
 import Gallery from "./components/Gallery";
 import About from "./components/About";
 import CreateMixtape from "./containers/CreateMixtape";
+import Home from "./components/Home";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 import API from "./adapters/API";
@@ -70,8 +71,9 @@ class App extends React.Component {
           logOut={this.logOut}
         />
         <Switch>
+          <Home path="/" exact component={Home} />
           <Playlists
-            path="/"
+            path="/create"
             exact
             component={Playlists}
             playlists={this.state.playlists}
