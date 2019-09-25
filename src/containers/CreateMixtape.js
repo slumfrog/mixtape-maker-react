@@ -10,7 +10,8 @@ class CreateMixtape extends React.Component {
       finalMixtape: [],
       tapeText: "",
       selectedPlaylist: [],
-      personalMessage: ""
+      personalMessage: "",
+      selectedPlaylistID: null
     };
   }
 
@@ -39,7 +40,8 @@ class CreateMixtape extends React.Component {
       artist: track.artist,
       duration: track.duration,
       name: track.name,
-      preview: track.preview
+      preview: track.preview,
+      mixtape_id: this.state.selectedPlaylistID
     };
     // get current comments
 
@@ -74,8 +76,12 @@ class CreateMixtape extends React.Component {
     })
       .then(resp => resp.json())
       .then(selectedPlaylist => {
-        this.setState({ selectedPlaylist: selectedPlaylist }, () =>
-          this.setTrackComments()
+        this.setState(
+          {
+            selectedPlaylist: selectedPlaylist,
+            selectedPlaylistID: this.props.computedMatch.params.id
+          },
+          () => this.setTrackComments()
         );
       });
   };
@@ -87,7 +93,8 @@ class CreateMixtape extends React.Component {
       track_id: track.track_id,
       duration: track.duration,
       artist: track.artist,
-      comment: ""
+      comment: "",
+      mixtape_id: this.state.selectedPlaylistID
     }));
     this.setState({
       finalMixtape: track_objs

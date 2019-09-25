@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const PlaylistCard = props => {
+const Playists = ({ playlists, selectPlaylist }) => {
   const { playlist } = props;
 
   return (
