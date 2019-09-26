@@ -1,6 +1,8 @@
 import React from "react";
 import UserForm from "./UserForm";
 import { Link } from "react-router-dom";
+import { Button } from "react-rainbow-components";
+import { Sidebar } from "react-rainbow-components";
 
 const Navbar = ({ user, signUp, logIn, logOut }) => {
   return (
@@ -8,7 +10,7 @@ const Navbar = ({ user, signUp, logIn, logOut }) => {
       {user && !user.error ? (
         <div>
           <div>You are signed in as: {user.spotify_id}</div>
-          <button onClick={logOut}>Log out</button>
+          <Button label="Logout" variant="brand" onClick={logOut} />
           <ul className="nav-links">
             <Link to="/">
               <li>Home</li>
@@ -16,8 +18,8 @@ const Navbar = ({ user, signUp, logIn, logOut }) => {
             <Link to="/create">
               <li>Create</li>
             </Link>
-            <Link to="/gallery">
-              <li>Gallery</li>
+            <Link to="/mixtapes">
+              <li>Mixtapes</li>
             </Link>
             <Link to="/about">
               <li>About</li>

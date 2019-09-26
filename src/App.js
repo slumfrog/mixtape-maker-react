@@ -2,20 +2,29 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import Playlists from "./containers/Playlists";
-import Gallery from "./components/Gallery";
+import Mixtapes from "./components/Mixtapes";
 import About from "./components/About";
+import Mixtape from "./components/Mixtape";
 import CreateMixtape from "./containers/CreateMixtape";
 import Home from "./components/Home";
-import { Switch, Route, withRouter } from "react-router-dom";
-
+import SimpleSidebar from "./components/Sidebar";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import API from "./adapters/API";
+
+const sidebarContainerStyles = {
+  width: "88px",
+  borderBottomLeftRadius: "0.875rem"
+};
 
 class App extends React.Component {
   state = {
-    user: undefined,
+    user: null,
     playlists: [],
-    selectedPlaylist: null
+    selectedPlaylist: null,
+    mixtapes: [],
+    selectedMixtape: null
   };
 
   componentDidMount() {
@@ -23,7 +32,8 @@ class App extends React.Component {
       .then(user => {
         this.setState({ user });
       })
-      .then(this.fetchPlaylists());
+      .then(this.fetchPlaylists())
+      .then(this.fetchMixtapes());
   }
 
   signUp = user => {
@@ -56,9 +66,24 @@ class App extends React.Component {
       .then(playlists => this.setState({ playlists: playlists }));
   };
 
+  fetchMixtapes = () => {
+    fetch("http://localhost:3000/mixtapes/", {
+      headers: {
+        ["Authorization"]: localStorage.token
+      }
+    })
+      .then(resp => resp.json())
+      .then(mixtapes => this.setState({ mixtapes: mixtapes }));
+  };
+
   selectPlaylist = playlist =>
     this.setState({ selectedPlaylist: playlist }, () =>
       this.props.history.push(`/create/${playlist.id}`)
+    );
+
+  selectMixtape = mixtape =>
+    this.setState({ selectedMixtape: mixtape }, () =>
+      this.props.history.push(`/mixtapes/${mixtape.id}`)
     );
 
   render() {
@@ -70,24 +95,54 @@ class App extends React.Component {
           logIn={this.logIn}
           logOut={this.logOut}
         />
-        <Switch>
-          <Home path="/" exact component={Home} />
-          <Playlists
-            path="/create"
-            exact
-            component={Playlists}
-            playlists={this.state.playlists}
-            selectPlaylist={this.selectPlaylist}
-          />
-          <CreateMixtape
-            path="/create/:id"
-            component={CreateMixtape}
-            selectedPlaylist={this.state.selectedPlaylist}
-            user={this.state.user}
-          />
-          <Gallery path="/gallery" exact component={Gallery} />
-          <About path="/about" exact component={About} />
-        </Switch>
+        <div
+          className="rainbow-background-color_white rainbow-p-top_small rainbow-p-bottom_medium"
+          style={sidebarContainerStyles}
+        >
+          <SimpleSidebar />
+        </div>
+
+        {this.state.user && !this.state.user.error ? (
+          <Switch>
+            <Home path="/" exact component={Home} />
+            <Playlists
+              path="/create"
+              exact
+              component={Playlists}
+              playlists={this.state.playlists}
+              selectPlaylist={this.selectPlaylist}
+            />
+            <CreateMixtape
+              path="/create/:id"
+              coponent={CreateMixtape}
+              selectedPlaylist={this.state.selectedPlaylist}
+              user={this.state.user}
+            />
+            <Mixtapes
+              path="/mixtapes"
+              exact
+              mixtapes={this.state.mixtapes}
+              component={Mixtapes}
+              selectMixtape={this.selectMixtape}
+            />
+            <Mixtape
+              exact
+              path="/mixtapes/:id"
+              selectedMixtape={this.state.selectedMixtape}
+              component={Mixtape}
+            />
+            <About path="/about" exact component={About} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Mixtape
+              exact
+              path="/mixtapes/:id"
+              selectedMixtape={this.state.selectedMixtape}
+              component={Mixtape}
+            />
+          </Switch>
+        )}
       </div>
     );
   }

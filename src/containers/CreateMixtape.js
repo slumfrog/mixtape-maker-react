@@ -125,7 +125,7 @@ class CreateMixtape extends React.Component {
 
   render() {
     return (
-      <>
+      <div>
         <button onClick={this.saveMixtape}>Save</button>
         <PersonalMessage handlePersonalMessage={this.handlePersonalMessage} />
         <Tape
@@ -137,7 +137,7 @@ class CreateMixtape extends React.Component {
           selectedPlaylist={this.state.selectedPlaylist}
           handleTrackComment={this.handleTrackComment}
         />
-      </>
+      </div>
     );
   }
 }

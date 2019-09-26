@@ -1,7 +1,8 @@
 import React from "react";
+import { AccordionSection, Accordion, Card } from "react-rainbow-components";
 
 function Home() {
-  return <div>This the Home page</div>;
+  return <div>Hello</div>;
 }
 
 export default Home;

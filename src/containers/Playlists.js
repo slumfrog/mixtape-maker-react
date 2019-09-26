@@ -1,28 +1,82 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// import React from "react";
 
-const Playlists = ({ playlists, selectPlaylist }) => {
-  const images = playlists.map(playlist => playlist.images);
-  const image = images.map(image => image[0].url);
-  // images.map(image => image[0].url || )
-  return (
-    <div>
-      {playlists.map(playlist => (
-        <>
-          <div
-            onClick={() => selectPlaylist(playlist)}
-            className="card"
-            key={playlist.id}
-          >
-            <h3>{playlist.name}</h3>
-            <img width="200px" src={images[1][0].url}></img>
-            {/* <img width="200px" src={images.map(image => image[0].url)}></img> */}
-            {playlist.id}
-          </div>
-        </>
-      ))}
-    </div>
-  );
-};
+// const Playlists = ({ playlists, selectPlaylist }) => {
+//   if (!playlists.length) return <div>loading</div>;
+//   return (
+//     <div>
+//       {playlists.map(playlist => (
+//         <>
+//           <div
+//             onClick={() => selectPlaylist(playlist)}
+//             className="card"
+//             key={playlist.id}
+//           >
+//             <h3>{playlist.name}</h3>
+//             <img
+//               width="200px"
+//               src={
+//                 playlist.images[0].url ||
+//                 "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
+//               }
+//             ></img>
+//             {playlist.id}
+//           </div>
+//         </>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default Playlists;
+
+import React, { Component } from "react";
+
+class Playlists extends React.Component {
+  state = {
+    playlists: []
+  };
+
+  componentDidMount() {
+    this.fetchPlaylists();
+  }
+
+  fetchPlaylists = () => {
+    fetch("http://localhost:3000/playlists/", {
+      headers: {
+        ["Authorization"]: localStorage.token
+      }
+    })
+      .then(resp => resp.json())
+      .then(playlists => this.setState({ playlists: playlists }));
+  };
+
+  render() {
+    if (this.state.playlists === undefined || this.state.playlists.length === 0)
+      return <div>loading</div>;
+    return (
+      <div>
+        {this.state.playlists.map(playlist => (
+          <>
+            <div
+              onClick={() => this.props.selectPlaylist(playlist)}
+              className="card"
+              key={playlist.id}
+            >
+              <h3>{playlist.name}</h3>
+              <img
+                width="200px"
+                src={
+                  playlist.images[0].url ||
+                  "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
+                }
+              ></img>
+              {playlist.id}
+            </div>
+          </>
+        ))}
+      </div>
+    );
+  }
+}
 
 export default Playlists;
