@@ -66,8 +66,9 @@ class Playlists extends React.Component {
               <img
                 width="200px"
                 src={
-                  playlist.images[0].url ||
-                  "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
+                  playlist.images.length === 0
+                    ? "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
+                    : playlist.images[0].url
                 }
               ></img>
               {playlist.id}
