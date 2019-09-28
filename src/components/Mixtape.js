@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { AccordionSection, Accordion, Card } from "react-rainbow-components";
 import MediaPlayer from "../components/MediaPlayer";
 import { Spinner } from "react-rainbow-components";
+import Grid from "@material-ui/core/Grid";
+
+let imgUrl =
+  "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/470470/5107c1158cfe9f8552383ff5490c793ae14c34c9.jpg";
 
 class Mixtape extends Component {
   constructor() {
@@ -37,24 +41,29 @@ class Mixtape extends Component {
         </div>
       );
     return (
-      <div>
-        <>{this.state.selectedMixtape[0].name}</>
-        <>
-          <div>
-            <MediaPlayer selectedMixtape={this.state.selectedMixtape} />
-          </div>
-        </>
-        <div className="rainbow-m-around_xx-large">
-          <Card>
-            <Accordion>
-              <AccordionSection label="Rainbow Accordion">
-                A rainbow is a meteorological phenomenon that is caused by
-                reflection, refraction and dispersion of light in water droplets
-                resulting in a spectrum of light appearing in the sky.
-              </AccordionSection>
-            </Accordion>
-          </Card>
-        </div>
+      <div
+        className="Component-Bg"
+        style={{
+          backgroundImage: "url(" + imgUrl + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat"
+        }}
+        item
+        xs={3}
+      >
+        <Grid container>
+          <Grid item xs={6}>
+            put the tape here
+          </Grid>
+          <Grid item xs={2}></Grid>
+          <Grid>
+            <div>
+              <MediaPlayer selectedMixtape={this.state.selectedMixtape} />
+            </div>
+          </Grid>
+          <Grid item xs={1}></Grid>
+        </Grid>
       </div>
     );
   }

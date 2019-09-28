@@ -131,17 +131,19 @@ class CreateMixtape extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.saveMixtape}>Save</button>
-        <PersonalMessage handlePersonalMessage={this.handlePersonalMessage} />
-        <Tape
-          handleTapeText={this.handleTapeText}
-          tapeImage={this.state.tapeImage}
-          tapeText={this.state.tapeText}
-        />
-        <Tracks
-          selectedPlaylist={this.state.selectedPlaylist}
-          handleTrackComment={this.handleTrackComment}
-        />
+        <div>
+          <button onClick={this.saveMixtape}>Save</button>
+          <PersonalMessage handlePersonalMessage={this.handlePersonalMessage} />
+          <Tape
+            handleTapeText={this.handleTapeText}
+            tapeImage={this.state.tapeImage}
+            tapeText={this.state.tapeText}
+          />
+          <Tracks
+            selectedPlaylist={this.state.selectedPlaylist}
+            handleTrackComment={this.handleTrackComment}
+          />
+        </div>
       </div>
     );
   }
