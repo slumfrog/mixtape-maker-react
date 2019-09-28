@@ -3,6 +3,9 @@ import Tracks from "../components/Tracks";
 import Tape from "../components/Tape";
 import PersonalMessage from "../components/PersonalMessage";
 
+let imgUrl =
+  "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/470470/5107c1158cfe9f8552383ff5490c793ae14c34c9.jpg";
+
 class CreateMixtape extends React.Component {
   constructor(props) {
     super(props);
@@ -33,9 +36,11 @@ class CreateMixtape extends React.Component {
   };
 
   handleTrackComment = (track, event) => {
-    const { id, value } = event.target;
+    const value = event.target.value;
+    const track_id = track.track_id;
+
     const trackComment = {
-      track_id: id,
+      track_id: track_id,
       comment: value,
       artist: track.artist,
       duration: track.duration,
@@ -49,11 +54,11 @@ class CreateMixtape extends React.Component {
 
     // if the comment song id already exists, find it and declare it
     let existingComment = currentComments.find(
-      trackComment => trackComment.track_id == id
+      trackComment => trackComment.track_id == track_id
     );
     // find the the Index of the existing comment
     let existingCommentIndex = this.state.finalMixtape.findIndex(
-      trackComment => trackComment.track_id == id
+      trackComment => trackComment.track_id == track_id
     );
     //in the currentComments, replace 1 element, at the existingComment index with the new track comment
     currentComments.splice(existingCommentIndex, 1, trackComment);
@@ -141,5 +146,15 @@ class CreateMixtape extends React.Component {
     );
   }
 }
+
+// Add this to div to bring in the cool background
+
+// className="Component-Bg"
+// style={{
+//   backgroundImage: "url(" + imgUrl + ")",
+//   backgroundSize: "cover",
+//   backgroundPosition: "center center",
+//   backgroundRepeat: "no-repeat"
+// }}
 
 export default CreateMixtape;

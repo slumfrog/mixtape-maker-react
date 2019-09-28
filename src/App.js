@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import NewNav from "./components/NewNav";
 import Sidebar from "./components/Sidebar";
 import Playlists from "./containers/Playlists";
 import Mixtapes from "./components/Mixtapes";
@@ -12,6 +13,8 @@ import Home from "./components/Home";
 import SimpleSidebar from "./components/Sidebar";
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import API from "./adapters/API";
+import SignIn from "./components/SignIn";
+import AWSSoundPlayer from "./components/MediaPlayer";
 
 const sidebarContainerStyles = {
   width: "88px",
@@ -49,6 +52,8 @@ class App extends React.Component {
     this.setState({ user: undefined });
     this.setState({ playlists: [] });
     this.setState({ selectedPlaylist: [] });
+    this.setState({ selectMixtape: null });
+    this.props.history.push("/");
   };
 
   handlePlaylistClick = props => {
@@ -95,12 +100,19 @@ class App extends React.Component {
           logIn={this.logIn}
           logOut={this.logOut}
         />
-        <div
+        <NewNav />
+        {/* <SignIn
+          user={this.state.user}
+          signUp={this.signUp}
+          logIn={this.logIn}
+          logOut={this.logOut}
+        /> */}
+        {/* <div
           className="rainbow-background-color_white rainbow-p-top_small rainbow-p-bottom_medium"
           style={sidebarContainerStyles}
         >
           <SimpleSidebar />
-        </div>
+        </div> */}
 
         {this.state.user && !this.state.user.error ? (
           <Switch>

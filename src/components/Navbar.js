@@ -2,7 +2,6 @@ import React from "react";
 import UserForm from "./UserForm";
 import { Link } from "react-router-dom";
 import { Button } from "react-rainbow-components";
-import { Sidebar } from "react-rainbow-components";
 
 const Navbar = ({ user, signUp, logIn, logOut }) => {
   return (

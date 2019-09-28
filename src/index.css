@@ -49,9 +49,96 @@ code {
   top: 100px;
 }
 
-.meme-form > input {
-  width: 45%;
-  height: 40px;
-}
-
 /* old meme styling */
+
+/* Music Player */
+
+.Player {
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  width: 280px;
+  height: 430px;
+}
+.Player .Artwork {
+  width: 280px;
+  height: 280px;
+  background-size: cover;
+  position: relative;
+}
+.Player .Artwork:hover .Controls {
+  background: rgba(41, 23, 32, 0.8);
+}
+.Player .Artwork .Controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 280px;
+  box-sizing: border-box;
+  background: rgba(41, 23, 32, 0.3);
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  padding: 20px 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transition: background 0.125s ease;
+  transition: background 0.125s ease;
+}
+.Player .Artwork .Controls i:hover {
+  cursor: pointer;
+}
+.Player .Artwork .Controls .fa-play,
+.Player .Artwork .Controls .fa-pause {
+  -webkit-transform: scale(2);
+  transform: scale(2);
+}
+.Player .TrackList {
+  width: 280px;
+  height: 120px;
+  background: #4a293a;
+  overflow-y: auto;
+  position: relative;
+}
+.Player .TrackList li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.Player .TrackList li:hover,
+.Player .TrackList li.selected {
+  background: #39202d;
+  cursor: pointer;
+  color: #d90368;
+}
+.Player .TrackList li:hover .duration {
+  opacity: 1;
+}
+.Player .TrackList li .title {
+  margin-left: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+.Player .TrackList li .duration {
+  margin-left: auto;
+  opacity: 0.25;
+}
+.Player .MusicCredit,
+.Player .MusicCredit a {
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+.Player .MusicCredit a {
+  color: #d90368;
+}
