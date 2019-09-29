@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import Tracks from "../components/Tracks";
 import Tape from "../components/Tape";
 import PersonalMessage from "../components/PersonalMessage";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Slide from "@material-ui/core/Slide";
+import { Button } from "react-rainbow-components";
 
 let imgUrl =
   "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/470470/5107c1158cfe9f8552383ff5490c793ae14c34c9.jpg";
@@ -130,24 +143,49 @@ class CreateMixtape extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <button onClick={this.saveMixtape}>Save</button>
-          <PersonalMessage handlePersonalMessage={this.handlePersonalMessage} />
+      <Grid container xs={12}>
+        <Grid item xs={6}>
           <Tape
             handleTapeText={this.handleTapeText}
             tapeImage={this.state.tapeImage}
             tapeText={this.state.tapeText}
           />
+          <PersonalMessage handlePersonalMessage={this.handlePersonalMessage} />
+          <Button
+            shaded
+            label="Save Mixtape"
+            variant="success"
+            className="rainbow-m-around_medium"
+            onClick={this.saveMixtape}
+          />
+        </Grid>
+        <Grid xs={6}>
           <Tracks
             selectedPlaylist={this.state.selectedPlaylist}
             handleTrackComment={this.handleTrackComment}
           />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
   }
 }
+
+// add this to have the fully animated background
+
+// <div class="area">
+//   <ul class="circles">
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//   </ul>
+// </div>;
 
 // Add this to div to bring in the cool background
 

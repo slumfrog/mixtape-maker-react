@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Spinner } from "react-rainbow-components";
+import { Card } from "react-rainbow-components";
 
 class Playlists extends React.Component {
   state = {
@@ -35,19 +36,19 @@ class Playlists extends React.Component {
           <>
             <div
               onClick={() => this.props.selectPlaylist(playlist)}
-              className="card"
+              style={{ cursor: "pointer" }}
+              className="card card-1"
               key={playlist.id}
             >
-              <h3>{playlist.name}</h3>
               <img
-                width="200px"
+                width="100%"
                 src={
                   playlist.images.length === 0
                     ? "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
                     : playlist.images[0].url
                 }
               ></img>
-              {playlist.id}
+              <h2>{playlist.name}</h2>
             </div>
           </>
         ))}

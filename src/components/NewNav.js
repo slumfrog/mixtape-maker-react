@@ -11,6 +11,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import { Link } from "react-router-dom";
+import { Button } from "react-rainbow-components";
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function NewNav() {
+const NewNav = ({ logOut, user }) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -46,17 +49,22 @@ export default function NewNav() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Photos
-          </Typography>
+          <ul className="nav-links">
+            <Link to="/">
+              <MenuItem onClick={handleClose}>Home</MenuItem>
+            </Link>
+            <Link to="/create">
+              <MenuItem onClick={handleClose}>Create</MenuItem>
+            </Link>
+            <Link to="/mixtapes">
+              <MenuItem onClick={handleClose}>My Mixtapes</MenuItem>
+            </Link>
+            <Link to="/about">
+              <MenuItem onClick={handleClose}>About</MenuItem>
+            </Link>
+          </ul>
+          <Button label="Logout" variant="brand" user={user} onClick={logOut} />
+
           {auth && (
             <div>
               <IconButton
@@ -84,7 +92,9 @@ export default function NewNav() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem user={user} onClick={logOut} onClick={handleClose}>
+                  Logout
+                </MenuItem>
               </Menu>
             </div>
           )}
@@ -92,4 +102,6 @@ export default function NewNav() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default NewNav;

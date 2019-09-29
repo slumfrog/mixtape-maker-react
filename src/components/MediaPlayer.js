@@ -13,7 +13,7 @@ export default class App extends React.Component {
     const playlist = this.props.selectedMixtape[0].tracks;
     const tracks = playlist.map(track => ({
       name: track.name,
-      artist: track.name,
+      artist: "track.name",
       url: track.preview_url + ".mp3",
       cover:
         "https://iheartcats.com/wp-content/uploads/2017/04/cat-square-feature.png",
@@ -60,7 +60,8 @@ export default class App extends React.Component {
   render() {
     const props = {
       mini: false,
-      autoplay: false,
+      preload: "auto",
+      autoplay: true,
       theme: "#FADFA3",
       loop: "all",
       volume: 0.7,
@@ -80,12 +81,15 @@ export default class App extends React.Component {
         </div>
       );
     return (
-      <ReactAplayer
-        {...props}
-        onInit={this.onInit}
-        onPlay={this.onPlay}
-        onPause={this.onPause}
-      />
+      <div>
+        <div>{this.state.current_message}</div>
+        <ReactAplayer
+          {...props}
+          onInit={this.onInit}
+          onPlay={this.onPlay}
+          onPause={this.onPause}
+        />
+      </div>
     );
   }
 }

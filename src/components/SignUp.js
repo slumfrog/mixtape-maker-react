@@ -51,10 +51,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = ({ submit, header }) => {
+const SignUp = ({ submit, header }) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [spotify_id, setSpotifyId] = useState("");
 
   return (
     <Container component="main" maxWidth="xs">
@@ -62,16 +63,17 @@ const SignIn = ({ submit, header }) => {
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>{/* <LockOutlinedIcon /> */}</Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         <form
           className={classes.form}
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            submit({ email, password });
+            submit({ email, password, spotify_id });
             setEmail("");
             setPassword("");
+            setSpotifyId("");
           }}
         >
           <TextField
@@ -97,8 +99,20 @@ const SignIn = ({ submit, header }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="spotify_id"
+            type="spotify_id"
+            label="Spotify Username"
+            type="text"
+            value={spotify_id}
+            onChange={e => setSpotifyId(e.target.value)}
+          />
           <Button type="submit" fullWidth variant="contained" color="primary">
-            Sign In
+            Sign Up
           </Button>
         </form>
       </div>
@@ -109,4 +123,4 @@ const SignIn = ({ submit, header }) => {
   );
 };
 
-export default SignIn;
+export default SignUp;

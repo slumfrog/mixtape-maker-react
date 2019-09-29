@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import SignInController from "./components/SignInController";
+import SignUp from "./components/SignUp";
 import NewNav from "./components/NewNav";
 import Sidebar from "./components/Sidebar";
 import Playlists from "./containers/Playlists";
@@ -27,7 +28,8 @@ class App extends React.Component {
     playlists: [],
     selectedPlaylist: null,
     mixtapes: [],
-    selectedMixtape: null
+    selectedMixtape: null,
+    member: ""
   };
 
   componentDidMount() {
@@ -53,6 +55,7 @@ class App extends React.Component {
     this.setState({ playlists: [] });
     this.setState({ selectedPlaylist: [] });
     this.setState({ selectMixtape: null });
+    this.setState({ mixtapes: [] });
     this.props.history.push("/");
   };
 
@@ -91,29 +94,24 @@ class App extends React.Component {
       this.props.history.push(`/mixtapes/${mixtape.id}`)
     );
 
+  signUpForm = () => {
+    this.setState({
+      member: false
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <Navbar
+        <SignInController
+          path="/"
+          exact
+          component={SignInController}
           user={this.state.user}
           signUp={this.signUp}
           logIn={this.logIn}
           logOut={this.logOut}
         />
-        <NewNav />
-        {/* <SignIn
-          user={this.state.user}
-          signUp={this.signUp}
-          logIn={this.logIn}
-          logOut={this.logOut}
-        /> */}
-        {/* <div
-          className="rainbow-background-color_white rainbow-p-top_small rainbow-p-bottom_medium"
-          style={sidebarContainerStyles}
-        >
-          <SimpleSidebar />
-        </div> */}
-
         {this.state.user && !this.state.user.error ? (
           <Switch>
             <Home path="/" exact component={Home} />
@@ -161,3 +159,20 @@ class App extends React.Component {
 }
 
 export default withRouter(App);
+
+{
+  /* <SignIn
+          user={this.state.user}
+          signUp={this.signUp}
+          logIn={this.logIn}
+          logOut={this.logOut}
+        /> */
+}
+{
+  /* <div
+          className="rainbow-background-color_white rainbow-p-top_small rainbow-p-bottom_medium"
+          style={sidebarContainerStyles}
+        >
+          <SimpleSidebar />
+        </div> */
+}
