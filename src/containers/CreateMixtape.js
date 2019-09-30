@@ -143,29 +143,33 @@ class CreateMixtape extends React.Component {
 
   render() {
     return (
-      <Grid container xs={12}>
-        <Grid item xs={6}>
-          <Tape
-            handleTapeText={this.handleTapeText}
-            tapeImage={this.state.tapeImage}
-            tapeText={this.state.tapeText}
-          />
-          <PersonalMessage handlePersonalMessage={this.handlePersonalMessage} />
-          <Button
-            shaded
-            label="Save Mixtape"
-            variant="success"
-            className="rainbow-m-around_medium"
-            onClick={this.saveMixtape}
-          />
+      <div class="bg">
+        <Grid container xs={12}>
+          <Grid item xs={6}>
+            <Tape
+              handleTapeText={this.handleTapeText}
+              tapeImage={this.state.tapeImage}
+              tapeText={this.state.tapeText}
+            />
+            <PersonalMessage
+              handlePersonalMessage={this.handlePersonalMessage}
+            />
+            <Button
+              shaded
+              label="Save Mixtape"
+              variant="success"
+              className="rainbow-m-around_medium"
+              onClick={this.saveMixtape}
+            />
+          </Grid>
+          <Grid xs={6}>
+            <Tracks
+              selectedPlaylist={this.state.selectedPlaylist}
+              handleTrackComment={this.handleTrackComment}
+            />
+          </Grid>
         </Grid>
-        <Grid xs={6}>
-          <Tracks
-            selectedPlaylist={this.state.selectedPlaylist}
-            handleTrackComment={this.handleTrackComment}
-          />
-        </Grid>
-      </Grid>
+      </div>
     );
   }
 }

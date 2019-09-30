@@ -103,7 +103,7 @@ class Mixtape extends Component {
         </div>
       );
     return (
-      <div>
+      <div className="bg">
         <Grid container xs={12}>
           <Grid item xs={3}>
             {this.state.currentMessage}

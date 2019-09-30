@@ -4,6 +4,7 @@ import { Button } from "react-rainbow-components";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import NewNav from "../components/NewNav";
+import NavBar from "../components/NavBar";
 
 const SignInController = ({ user, signUp, logIn, logOut }) => {
   const [member, setMember] = useState(true);
@@ -12,20 +13,19 @@ const SignInController = ({ user, signUp, logIn, logOut }) => {
     <div>
       {user && !user.error ? (
         <div>
-          <div>You are signed in as: {user.spotify_id}</div>
-          <NewNav user={user} logOut={logOut} />
+          <NavBar user={user} logOut={logOut} />
         </div>
       ) : window.location.pathname.includes("/mixtapes/") ? null : member ===
         true ? (
         <>
-          <SignIn submit={logIn} header={"Log in"} />
+          <SignIn user={user} submit={logIn} header={"Log in"} />
           <Link onClick={() => setMember(false)}>
             Don't have an account? Sign Up
           </Link>
         </>
       ) : (
         <>
-          <SignUp submit={signUp} header={"Sign up"} />
+          <SignUp user={user} submit={signUp} header={"Sign up"} />
           <Link onClick={() => setMember(true)}>
             Already have an account? Sign In
           </Link>

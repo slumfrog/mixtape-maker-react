@@ -17,19 +17,13 @@ import API from "./adapters/API";
 import SignIn from "./components/SignIn";
 import AWSSoundPlayer from "./components/MediaPlayer";
 
-const sidebarContainerStyles = {
-  width: "88px",
-  borderBottomLeftRadius: "0.875rem"
-};
-
 class App extends React.Component {
   state = {
     user: null,
     playlists: [],
     selectedPlaylist: null,
     mixtapes: [],
-    selectedMixtape: null,
-    member: ""
+    selectedMixtape: null
   };
 
   componentDidMount() {
@@ -93,12 +87,6 @@ class App extends React.Component {
     this.setState({ selectedMixtape: mixtape }, () =>
       this.props.history.push(`/mixtapes/${mixtape.id}`)
     );
-
-  signUpForm = () => {
-    this.setState({
-      member: false
-    });
-  };
 
   render() {
     return (
