@@ -2,6 +2,9 @@ import React from "react";
 import ReactAplayer from "react-aplayer";
 import { Spinner } from "react-rainbow-components";
 
+let imgUrl =
+  "https://assets.justinmind.com/blog/wp-content/uploads/2018/05/top-10-worst-90s-website-designs-header.png";
+
 export default class App extends React.Component {
   state = {
     tracks: [],
@@ -43,9 +46,12 @@ export default class App extends React.Component {
     let currentTracks = this.state.tracks;
     let clickedTrackSrc = this.state.current_song;
     let obj = currentTracks.find(o => o.url === clickedTrackSrc);
-    this.setState({
-      current_message: obj.lrc
-    });
+    this.setState(
+      {
+        current_message: obj.lrc
+      },
+      () => this.props.handleCurrentMessage(this.state.current_message)
+    );
   };
 
   onPause = () => {

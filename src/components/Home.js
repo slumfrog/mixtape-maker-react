@@ -1,10 +1,10 @@
 import React from "react";
-import SignIn from "../components/SignIn";
 
-function Home() {
+function Home({ user }) {
   return (
     <div>
-      <div className="text-pop-up-top">Welcome to MixtapeMaker</div>;
+      <div className="text-pop-up-top">Welcome to MixtapeMaker</div>
+      <img src={user.profile_pic} />
     </div>
   );
 }

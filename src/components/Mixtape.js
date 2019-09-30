@@ -14,6 +14,7 @@ class Mixtape extends Component {
     super();
     this.state = {
       selectedMixtape: null,
+      currentMessage: "",
       activeDrags: 0,
       deltaPosition: {
         x: 0,
@@ -86,6 +87,10 @@ class Mixtape extends Component {
       });
   };
 
+  handleCurrentMessage = currentMessage => {
+    this.setState({ currentMessage: currentMessage });
+  };
+
   render() {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
     const { deltaPosition, controlledPosition } = this.state;
@@ -99,18 +104,9 @@ class Mixtape extends Component {
       );
     return (
       <div>
-        <Grid
-          container
-          xs={12}
-          style={{
-            backgroundImage: "url(" + imgUrl + ")",
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat"
-          }}
-        >
+        <Grid container xs={12}>
           <Grid item xs={3}>
-            put the tape here
+            {this.state.currentMessage}
           </Grid>
           <Draggable {...dragHandlers}>
             <Grid item xs={3}>
@@ -121,7 +117,10 @@ class Mixtape extends Component {
           <Draggable {...dragHandlers}>
             <Grid item xs={4}>
               <div>
-                <MediaPlayer selectedMixtape={this.state.selectedMixtape} />
+                <MediaPlayer
+                  handleCurrentMessage={this.handleCurrentMessage}
+                  selectedMixtape={this.state.selectedMixtape}
+                />
               </div>
             </Grid>
           </Draggable>

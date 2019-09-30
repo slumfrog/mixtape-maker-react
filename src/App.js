@@ -114,7 +114,7 @@ class App extends React.Component {
         />
         {this.state.user && !this.state.user.error ? (
           <Switch>
-            <Home path="/" exact component={Home} />
+            <Home path="/" exact user={this.state.user} component={Home} />
             <Playlists
               path="/create"
               exact
@@ -134,6 +134,7 @@ class App extends React.Component {
               mixtapes={this.state.mixtapes}
               component={Mixtapes}
               selectMixtape={this.selectMixtape}
+              fetchMixtapes={this.fetchMixtapes}
             />
             <Mixtape
               exact
