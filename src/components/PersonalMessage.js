@@ -9,15 +9,6 @@ const PersonalMessage = props => {
   return (
     <>
       <div>
-        {/* <form>
-          <input
-            type="text"
-            value={props.personalMessage}
-            name="personalMessage"
-            placeholder="Why did you make this mixtape"
-            onChange={props.handlePersonalMessage}
-          />
-        </form> */}
         <Textarea
           id="example-textarea-1"
           label="Enter a personal message for your receipient"

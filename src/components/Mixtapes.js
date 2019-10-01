@@ -34,7 +34,12 @@ class Gallery extends Component {
               key={mixtape.id}
             >
               <div width="100%" class="mixtape">
-                <img alt="mixtape" width="100%" src={tapeImage}></img>
+                <img
+                  draggable="false"
+                  alt="mixtape"
+                  width="100%"
+                  src={tapeImage}
+                ></img>
                 <h2 className="top">{mixtape.name}</h2>
               </div>
             </div>

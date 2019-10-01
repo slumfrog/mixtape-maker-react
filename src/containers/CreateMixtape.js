@@ -124,6 +124,7 @@ class CreateMixtape extends Component {
           user_id: this.props.user.id, // get user id from token
           name: this.state.tapeText,
           personal_message: this.state.personalMessage,
+          mixtape_id: this.state.selectedPlaylistID,
           tracks: this.state.finalMixtape
         }
       })

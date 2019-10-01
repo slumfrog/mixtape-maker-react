@@ -16,6 +16,7 @@ class Mixtape extends Component {
     this.state = {
       selectedMixtape: null,
       currentMessage: "",
+      current_track: "",
       activeDrags: 0,
       deltaPosition: {
         x: 0,
@@ -126,17 +127,21 @@ class Mixtape extends Component {
               </div>
             </Grid>
           </Draggable>
-          <Draggable {...dragHandlers}>
-            <Grid item xs={2}>
-              <a
-                href="https://open.spotify.com/playlist/5MN0dmStHFnS8u88Fekz8s?si=IdhVBQlOQkKXMGQpt_Ia2A"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Your Link
-              </a>
-            </Grid>
-          </Draggable>
+          <Grid item xs={2}>
+            <a
+              href={
+                "https://open.spotify.com/playlist/" +
+                this.state.selectedMixtape[0].mixtape_id
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="spotify_button"
+                src="http://scubaofficial.com/wp-content/uploads/2018/10/Listen-on-Spotify-badge-button.png"
+              ></img>
+            </a>
+          </Grid>
         </Grid>
       </div>
     );
