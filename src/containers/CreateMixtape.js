@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, DOM } from "react";
 import Tracks from "../components/Tracks";
 import Tape from "../components/Tape";
 import PersonalMessage from "../components/PersonalMessage";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "react-rainbow-components";
+import ScrollArea from "react-scrollbar";
+import Tracks2 from "../components/Tracks2";
 
 let imgUrl =
   "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/470470/5107c1158cfe9f8552383ff5490c793ae14c34c9.jpg";
@@ -45,7 +47,7 @@ class CreateMixtape extends Component {
       track_id: track_id,
       comment: value,
       artist: track.artist,
-      duration: track.duration,
+      duration: track.image,
       name: track.name,
       preview: track.preview,
       mixtape_id: this.state.selectedPlaylistID
@@ -98,7 +100,7 @@ class CreateMixtape extends Component {
       name: track.name,
       preview: track.preview,
       track_id: track.track_id,
-      duration: track.duration,
+      duration: track.image,
       artist: track.artist,
       comment: "",
       mixtape_id: this.state.selectedPlaylistID
@@ -153,10 +155,17 @@ class CreateMixtape extends Component {
             />
           </Grid>
           <Grid xs={6}>
-            <Tracks
-              selectedPlaylist={this.state.selectedPlaylist}
-              handleTrackComment={this.handleTrackComment}
-            />
+            <ScrollArea
+              speed={0.8}
+              className="area"
+              contentClassName="content2"
+              horizontal={false}
+            >
+              <Tracks2
+                selectedPlaylist={this.state.selectedPlaylist}
+                handleTrackComment={this.handleTrackComment}
+              />
+            </ScrollArea>
           </Grid>
         </Grid>
       </div>

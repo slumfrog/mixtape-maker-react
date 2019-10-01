@@ -20,8 +20,7 @@ export default class App extends React.Component {
       url: track.preview_url
         ? track.preview_url + ".mp3"
         : `https://p.scdn.co/mp3-preview/d377a4625baab0a7f55656003e4b89b886b65ae2?cid=c77b35b1851b46ac8325ef73d8f60a56.mp3&myid=${track.track_id}`,
-      cover:
-        "https://iheartcats.com/wp-content/uploads/2017/04/cat-square-feature.png",
+      cover: track.duration,
       theme: track.id,
       lrc: "[00:00.00] " + track.message
     }));
@@ -38,7 +37,8 @@ export default class App extends React.Component {
   onPlay = e => {
     this.setState(
       {
-        current_song: e.srcElement.src
+        current_song: e.srcElement.src,
+        currentTrackID: e.target.src.split("myid=")[1]
       },
       () => this.findMessage()
     );
@@ -48,12 +48,12 @@ export default class App extends React.Component {
     let currentTracks = this.state.tracks;
     let clickedTrackSrc = this.state.current_song;
     let obj = currentTracks.find(o => o.url === clickedTrackSrc);
-
     this.setState(
       {
-        current_message: obj.lrc
+        current_message: obj.lrc,
+        current_track: obj
       },
-      () => this.props.handleCurrentMessage(this.state.current_message)
+      () => this.props.handleCurrentTrack(this.state.current_message, obj)
     );
   };
 
@@ -61,7 +61,6 @@ export default class App extends React.Component {
 
   // example of access aplayer instance
   onInit = ap => {
-    debugger;
     this.ap = ap;
   };
 

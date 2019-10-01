@@ -16,7 +16,7 @@ class Mixtape extends Component {
     this.state = {
       selectedMixtape: null,
       currentMessage: "",
-      current_track: "",
+      currentTrack: "",
       activeDrags: 0,
       deltaPosition: {
         x: 0,
@@ -89,8 +89,9 @@ class Mixtape extends Component {
       });
   };
 
-  handleCurrentMessage = currentMessage => {
+  handleCurrentTrack = (currentMessage, obj) => {
     this.setState({ currentMessage: currentMessage });
+    this.setState({ currentTrack: obj });
   };
 
   render() {
@@ -110,6 +111,11 @@ class Mixtape extends Component {
           <Draggable {...dragHandlers}>
             <Grid item xs={3}>
               <div className="focus-in-expand">{this.state.currentMessage}</div>
+              <img
+                draggable="false"
+                class="spotify_button"
+                src={this.state.currentTrack.cover}
+              ></img>
             </Grid>
           </Draggable>
           <Draggable {...dragHandlers}>
@@ -121,7 +127,7 @@ class Mixtape extends Component {
             <Grid item xs={4}>
               <div>
                 <MediaPlayer
-                  handleCurrentMessage={this.handleCurrentMessage}
+                  handleCurrentTrack={this.handleCurrentTrack}
                   selectedMixtape={this.state.selectedMixtape}
                 />
               </div>
