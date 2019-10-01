@@ -16,7 +16,7 @@ export default class App extends React.Component {
     const playlist = this.props.selectedMixtape[0].tracks;
     const tracks = playlist.map(track => ({
       name: track.name,
-      artist: "track.name",
+      artist: track.name,
       url: track.preview_url + ".mp3",
       cover:
         "https://iheartcats.com/wp-content/uploads/2017/04/cat-square-feature.png",
@@ -54,9 +54,7 @@ export default class App extends React.Component {
     );
   };
 
-  onPause = () => {
-    console.log("on pause");
-  };
+  onPause = () => {};
 
   // example of access aplayer instance
   onInit = ap => {
@@ -73,8 +71,8 @@ export default class App extends React.Component {
       volume: 0.7,
       mutex: true,
       listFolded: false,
-      listMaxHeight: 90,
-      lrcType: 1,
+      listMaxHeight: 200,
+      lrcType: 3,
       audio: this.state.tracks
     };
 
@@ -88,7 +86,6 @@ export default class App extends React.Component {
       );
     return (
       <div>
-        <div>{this.state.current_message}</div>
         <ReactAplayer
           {...props}
           onInit={this.onInit}

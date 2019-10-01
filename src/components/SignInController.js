@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-rainbow-components";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import NewNav from "../components/NewNav";
 import NavBar from "../components/NavBar";
 
 const SignInController = ({ user, signUp, logIn, logOut }) => {

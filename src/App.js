@@ -1,21 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import SignInController from "./components/SignInController";
-import SignUp from "./components/SignUp";
-import NewNav from "./components/NewNav";
-import Sidebar from "./components/Sidebar";
 import Playlists from "./containers/Playlists";
 import Mixtapes from "./components/Mixtapes";
-import About from "./components/About";
 import Mixtape from "./components/Mixtape";
 import CreateMixtape from "./containers/CreateMixtape";
 import Home from "./components/Home";
-import SimpleSidebar from "./components/Sidebar";
-import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Switch, withRouter } from "react-router-dom";
 import API from "./adapters/API";
-import SignIn from "./components/SignIn";
-import AWSSoundPlayer from "./components/MediaPlayer";
 
 class App extends React.Component {
   state = {
@@ -130,7 +122,6 @@ class App extends React.Component {
               selectedMixtape={this.state.selectedMixtape}
               component={Mixtape}
             />
-            <About path="/about" exact component={About} />
           </Switch>
         ) : (
           <Switch>
@@ -148,20 +139,3 @@ class App extends React.Component {
 }
 
 export default withRouter(App);
-
-{
-  /* <SignIn
-          user={this.state.user}
-          signUp={this.signUp}
-          logIn={this.logIn}
-          logOut={this.logOut}
-        /> */
-}
-{
-  /* <div
-          className="rainbow-background-color_white rainbow-p-top_small rainbow-p-bottom_medium"
-          style={sidebarContainerStyles}
-        >
-          <SimpleSidebar />
-        </div> */
-}

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { AccordionSection, Accordion, Card } from "react-rainbow-components";
 import MediaPlayer from "../components/MediaPlayer";
 import { Spinner } from "react-rainbow-components";
 import Grid from "@material-ui/core/Grid";
 import Draggable from "react-draggable";
-import MixtapeComments from "../components/MixtapeComments";
+import TapeMixtape from "../components/TapeMixtape";
+import { Button } from "react-rainbow-components";
+import { Link } from "react-router-dom";
 
 let imgUrl =
   "https://assets.justinmind.com/blog/wp-content/uploads/2018/05/top-10-worst-90s-website-designs-header.png";
@@ -105,15 +106,16 @@ class Mixtape extends Component {
     return (
       <div className="bg">
         <Grid container xs={12}>
-          <Grid item xs={3}>
-            {this.state.currentMessage}
-          </Grid>
           <Draggable {...dragHandlers}>
             <Grid item xs={3}>
-              <MixtapeComments />
+              <div className="focus-in-expand">{this.state.currentMessage}</div>
             </Grid>
           </Draggable>
-          <Grid item xs={1}></Grid>
+          <Draggable {...dragHandlers}>
+            <Grid item xs={3}>
+              <TapeMixtape selectedMixtape={this.state.selectedMixtape} />
+            </Grid>
+          </Draggable>
           <Draggable {...dragHandlers}>
             <Grid item xs={4}>
               <div>
@@ -124,7 +126,17 @@ class Mixtape extends Component {
               </div>
             </Grid>
           </Draggable>
-          <Grid item xs={1}></Grid>
+          <Draggable {...dragHandlers}>
+            <Grid item xs={2}>
+              <a
+                href="https://open.spotify.com/playlist/5MN0dmStHFnS8u88Fekz8s?si=IdhVBQlOQkKXMGQpt_Ia2A"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Your Link
+              </a>
+            </Grid>
+          </Draggable>
         </Grid>
       </div>
     );

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Spinner } from "react-rainbow-components";
-import { Card } from "react-rainbow-components";
 
-class Playlists extends React.Component {
+class Playlists extends Component {
   state = {
     playlists: []
   };
@@ -42,6 +41,7 @@ class Playlists extends React.Component {
             >
               <img
                 width="100%"
+                alt="playlist"
                 src={
                   playlist.images.length === 0
                     ? "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
