@@ -14,9 +14,11 @@ export default class App extends React.Component {
 
   mappedTracks = () => {
     const playlist = this.props.selectedMixtape[0].tracks;
+    debugger;
+
     const tracks = playlist.map(track => ({
       name: track.name,
-      artist: track.name,
+      artist: track.artists,
       url: track.preview_url
         ? track.preview_url + ".mp3"
         : `https://p.scdn.co/mp3-preview/d377a4625baab0a7f55656003e4b89b886b65ae2?cid=c77b35b1851b46ac8325ef73d8f60a56.mp3&myid=${track.track_id}`,

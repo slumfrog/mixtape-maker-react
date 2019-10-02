@@ -17,11 +17,30 @@ import {
 
 class NavbarPage extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    profile: "",
+    stock_profile:
+      "https://www.pnglot.com/pngfile/detail/493-4930333_user-icon-my-profile-icon-png.png"
   };
+
+  componentDidMount() {
+    this.fetchProfilePic();
+  }
 
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  fetchProfilePic = () => {
+    fetch("http://localhost:3000/profile/", {
+      headers: {
+        ["Authorization"]: localStorage.token
+      }
+    })
+      .then(resp => resp.json())
+      .then(profile => {
+        this.setState({ profile: profile.profile_pic });
+      });
   };
 
   render() {
@@ -53,8 +72,9 @@ class NavbarPage extends Component {
                 <MDBDropdownToggle className="dopdown-toggle" nav>
                   <img
                     src={
-                      this.props.profile.images &&
-                      this.props.profile.images[0].url
+                      this.state.profile === undefined
+                        ? this.state.stock_profile
+                        : this.state.profile
                     }
                     className="rounded-circle z-depth-0"
                     style={{ height: "35px", padding: 0 }}

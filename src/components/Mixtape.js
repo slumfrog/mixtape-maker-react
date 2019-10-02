@@ -40,6 +40,16 @@ class Mixtape extends Component {
     });
   };
 
+  copy = () => {
+    const el = document.createElement("input");
+    el.value = this.props.url;
+    el.id = "url-input";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    el.remove();
+  };
+
   onStart = () => {
     this.setState({ activeDrags: ++this.state.activeDrags });
   };
@@ -91,7 +101,8 @@ class Mixtape extends Component {
   };
 
   handleCurrentTrack = (currentMessage, obj) => {
-    this.setState({ currentMessage: currentMessage });
+    let updatedCurrentMessage = currentMessage.replace("[00:00.00] ", "");
+    this.setState({ currentMessage: updatedCurrentMessage });
     this.setState({ currentTrack: obj });
   };
 
@@ -108,24 +119,19 @@ class Mixtape extends Component {
       );
     return (
       <div className="bg">
-        <Grid container xs={12}>
+        <Grid container spacing={3}>
           <Draggable {...dragHandlers}>
             <Grid item xs={3}>
-              <div className="focus-in-expand">{this.state.currentMessage}</div>
-              <img
-                draggable="false"
-                class="spotify_button"
-                src={this.state.currentTrack.cover}
-              ></img>
+              <img draggable="false" src={this.state.currentTrack.cover}></img>
             </Grid>
           </Draggable>
           <Draggable {...dragHandlers}>
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <TapeMixtape selectedMixtape={this.state.selectedMixtape} />
             </Grid>
           </Draggable>
           <Draggable {...dragHandlers}>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <div>
                 <MediaPlayer
                   handleCurrentTrack={this.handleCurrentTrack}
@@ -134,21 +140,28 @@ class Mixtape extends Component {
               </div>
             </Grid>
           </Draggable>
-          <Grid item xs={2}>
-            <a
-              href={
-                "https://open.spotify.com/playlist/" +
-                this.state.selectedMixtape[0].mixtape_id
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                class="spotify_button"
-                src="http://scubaofficial.com/wp-content/uploads/2018/10/Listen-on-Spotify-badge-button.png"
-              ></img>
-            </a>
-          </Grid>
+          <Draggable {...dragHandlers}>
+            <Grid item xs={12}>
+              <div>
+                <div className="text-pop-up-top">
+                  {this.state.currentMessage}
+                </div>
+              </div>
+            </Grid>
+          </Draggable>
+          <a
+            href={
+              "https://open.spotify.com/playlist/" +
+              this.state.selectedMixtape[0].mixtape_id
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="spotify_button"
+              src="http://scubaofficial.com/wp-content/uploads/2018/10/Listen-on-Spotify-badge-button.png"
+            ></img>
+          </a>
         </Grid>
       </div>
     );

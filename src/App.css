@@ -733,6 +733,11 @@ body {
 }
 
 /* song message mixtape page end */
-/* 
 
-cassette */
+.spotify_button {
+  width: 200px;
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  font-size: 18px;
+}

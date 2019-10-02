@@ -15,8 +15,7 @@ class App extends React.Component {
     playlists: [],
     selectedPlaylist: null,
     mixtapes: [],
-    selectedMixtape: null,
-    profile: {}
+    selectedMixtape: null
   };
 
   componentDidMount() {
@@ -25,7 +24,6 @@ class App extends React.Component {
 
   validate = () => {
     API.validateUser().then(user => {
-      this.fetchProfilePic(user);
       this.setState({ user });
     });
   };
@@ -55,17 +53,6 @@ class App extends React.Component {
   handlePlaylistClick = props => {
     this.setState({ selectedId: props });
     this.fetchPlaylist(props);
-  };
-
-  fetchProfilePic = user => {
-    fetch(`https://api.spotify.com/v1/users/${user.spotify_id}`, {
-      headers: {
-        ["Authorization"]:
-          "Bearer BQDAWc83M3eOZPtpZBUxHXXm63fwQg-4Z6kHBprLAmyBVcUJAHd7sEvuy7lKoMRW7v_Zd4oBqLAgr9_KszvPpnO7OlOtHGifKZhKgyem60suJ9xeeJB0pxdoL9DtHbFXLm-VIzERR3S0PXjD4JkCWyLGzxE23__CYQeJVE3A-B2Dg9DOR5nV_SyOGV8Raqs8cUBYH0tqwqbIKc4_hLdPQOn2FDaN15i6U-6WzD1cDubLidPd3dp-cncu31XGQsxvpa4uK4t71IoDlwPu3A"
-      }
-    })
-      .then(resp => resp.json())
-      .then(profile => this.setState({ profile: profile }));
   };
 
   fetchPlaylists = () => {
