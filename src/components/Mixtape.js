@@ -8,15 +8,12 @@ import { Button } from "react-rainbow-components";
 import { Link } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 
-let imgUrl = "https://picsum.photos/1920/1081";
-let imgUrl2 = "https://picsum.photos/1920/1082";
-
 class Mixtape extends Component {
   constructor() {
     super();
     this.state = {
       selectedMixtape: null,
-      backgroundImage: "imgUrl",
+      backgroundImage: "https://wallpaperplay.com/walls/full/7/f/4/47283.jpg",
       allBackgrounds: [],
       currentMessage: "",
       currentTrack: "",
@@ -136,7 +133,7 @@ class Mixtape extends Component {
       );
     return (
       <div
-        className="bg"
+        className="bg2"
         style={{ backgroundImage: `url(${this.state.backgroundImage})` }}
       >
         <Grid container spacing={3}>
