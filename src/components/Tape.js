@@ -1,5 +1,5 @@
 import React from "react";
-import tape from "../tape2.gif";
+import tape from "../tape2.png";
 import { Input } from "react-rainbow-components";
 const Tape = props => {
   const containerStyles = {

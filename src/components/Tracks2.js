@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import { Spinner } from "react-rainbow-components";
+import { Input } from "react-rainbow-components";
+
+const containerStyles = {
+  maxWidth: 700
+};
 
 class Tracks2 extends Component {
   state = {
@@ -31,26 +36,28 @@ class Tracks2 extends Component {
       );
     return (
       <div>
-        {this.state.playlists.map(playlist => (
-          <>
-            <div
-              onClick={() => this.props.selectPlaylist(playlist)}
-              style={{ cursor: "pointer" }}
-              className="card card-1"
-              key={playlist.id}
-            >
-              <img
-                width="100%"
-                alt="playlist"
-                src={
-                  playlist.images.length === 0
-                    ? "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
-                    : playlist.images[0].url
-                }
-              ></img>
-              <h2>{playlist.name}</h2>
-            </div>
-          </>
+        {this.props.selectedPlaylist.map(track => (
+          <div class="tracks-card tracks-card-1 ">
+            <h2>{track.name}</h2>
+            <img
+              width="100%"
+              alt="playlist"
+              src={
+                track.image.length === 0
+                  ? "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/_Unknown.png"
+                  : track.image
+              }
+            ></img>
+            <Input
+              type="text"
+              id="outlined-multiline-flexible"
+              placeholder={"I chose " + track.name + " because..."}
+              style={containerStyles}
+              className="rainbow-m-vertical_x-large rainbow-p-horizontal_medium rainbow-m_auto"
+              value={this.props.trackComment}
+              onChange={event => this.props.handleTrackComment(track, event)}
+            />
+          </div>
         ))}
       </div>
     );

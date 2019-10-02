@@ -4,14 +4,14 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import NavBar from "../components/NavBar";
 
-const SignInController = ({ user, signUp, logIn, logOut }) => {
+const SignInController = ({ user, signUp, logIn, logOut, profile }) => {
   const [member, setMember] = useState(true);
 
   return (
     <div>
       {user && !user.error ? (
         <div>
-          <NavBar user={user} logOut={logOut} />
+          <NavBar user={user} profile={profile} logOut={logOut} />
         </div>
       ) : window.location.pathname.includes("/mixtapes/") ? null : member ===
         true ? (

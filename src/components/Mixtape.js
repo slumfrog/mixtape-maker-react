@@ -6,6 +6,7 @@ import Draggable from "react-draggable";
 import TapeMixtape from "../components/TapeMixtape";
 import { Button } from "react-rainbow-components";
 import { Link } from "react-router-dom";
+import ScrollArea from "react-scrollbar";
 
 let imgUrl =
   "https://assets.justinmind.com/blog/wp-content/uploads/2018/05/top-10-worst-90s-website-designs-header.png";

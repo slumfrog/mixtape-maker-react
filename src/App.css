@@ -100,6 +100,29 @@
 
 /* Mixtape card end */
 
+/* Mixtape card start */
+
+.tracks-card {
+  background: #f9f9f8;
+  border-radius: 2px;
+  display: inline-block;
+  height: 200px;
+  margin: 5rem;
+  position: relative;
+  width: 200px;
+}
+
+.tracks-card-1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tracks-card-1:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* Mixtape card end */
+
 /* tape text styling */
 
 .tape {
@@ -130,6 +153,16 @@
 
 .tape > .top {
   top: 88px;
+}
+
+.tape > .over {
+  position: absolute;
+  top: 13.5%;
+  left: 8.5%;
+}
+
+.tape > .topShowPage {
+  top: 64px;
 }
 
 /* tape text styling end */
@@ -545,7 +578,7 @@ body {
 }
 
 .text-pop-up-top {
-  font-size: 80px;
+  font-size: 70px;
   color: #ffffff;
   font-family: "Monoton", cursive;
   font-weight: bold;
@@ -554,7 +587,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -70px 0 0 -170px;
+  margin: -70px 0 0 -600px;
   -webkit-animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
   animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -700,3 +733,6 @@ body {
 }
 
 /* song message mixtape page end */
+/* 
+
+cassette */

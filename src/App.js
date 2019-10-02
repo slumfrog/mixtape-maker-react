@@ -15,24 +15,30 @@ class App extends React.Component {
     playlists: [],
     selectedPlaylist: null,
     mixtapes: [],
-    selectedMixtape: null
+    selectedMixtape: null,
+    profile: {}
   };
 
   componentDidMount() {
-    API.validateUser()
-      .then(user => {
-        this.setState({ user });
-      })
-      .then(this.fetchPlaylists())
-      .then(this.fetchMixtapes());
+    this.validate();
   }
+
+  validate = () => {
+    API.validateUser().then(user => {
+      this.fetchProfilePic(user);
+      this.setState({ user });
+    });
+  };
 
   signUp = user => {
     API.signUp(user).then(user => this.setState({ user }));
   };
 
   logIn = user => {
-    API.logIn(user).then(user => this.setState({ user }));
+    API.logIn(user).then(user => {
+      this.setState({ user });
+      this.validate();
+    });
   };
 
   logOut = () => {
@@ -42,12 +48,24 @@ class App extends React.Component {
     this.setState({ selectedPlaylist: [] });
     this.setState({ selectMixtape: null });
     this.setState({ mixtapes: [] });
+    this.setState({ profile: {} });
     this.props.history.push("/");
   };
 
   handlePlaylistClick = props => {
     this.setState({ selectedId: props });
     this.fetchPlaylist(props);
+  };
+
+  fetchProfilePic = user => {
+    fetch(`https://api.spotify.com/v1/users/${user.spotify_id}`, {
+      headers: {
+        ["Authorization"]:
+          "Bearer BQDAWc83M3eOZPtpZBUxHXXm63fwQg-4Z6kHBprLAmyBVcUJAHd7sEvuy7lKoMRW7v_Zd4oBqLAgr9_KszvPpnO7OlOtHGifKZhKgyem60suJ9xeeJB0pxdoL9DtHbFXLm-VIzERR3S0PXjD4JkCWyLGzxE23__CYQeJVE3A-B2Dg9DOR5nV_SyOGV8Raqs8cUBYH0tqwqbIKc4_hLdPQOn2FDaN15i6U-6WzD1cDubLidPd3dp-cncu31XGQsxvpa4uK4t71IoDlwPu3A"
+      }
+    })
+      .then(resp => resp.json())
+      .then(profile => this.setState({ profile: profile }));
   };
 
   fetchPlaylists = () => {
@@ -91,10 +109,17 @@ class App extends React.Component {
           signUp={this.signUp}
           logIn={this.logIn}
           logOut={this.logOut}
+          profile={this.state.profile}
         />
         {this.state.user && !this.state.user.error ? (
           <Switch>
-            <Home path="/" exact user={this.state.user} component={Home} />
+            <Home
+              path="/"
+              exact
+              profile={this.state.profile}
+              user={this.state.user}
+              component={Home}
+            />
             <Playlists
               path="/create"
               exact

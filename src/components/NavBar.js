@@ -52,7 +52,10 @@ class NavbarPage extends Component {
               <MDBDropdown>
                 <MDBDropdownToggle className="dopdown-toggle" nav>
                   <img
-                    src={this.props.user.profile_pic}
+                    src={
+                      this.props.profile.images &&
+                      this.props.profile.images[0].url
+                    }
                     className="rounded-circle z-depth-0"
                     style={{ height: "35px", padding: 0 }}
                     alt=""
