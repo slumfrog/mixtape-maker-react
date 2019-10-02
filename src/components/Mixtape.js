@@ -8,14 +8,16 @@ import { Button } from "react-rainbow-components";
 import { Link } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 
-let imgUrl =
-  "https://assets.justinmind.com/blog/wp-content/uploads/2018/05/top-10-worst-90s-website-designs-header.png";
+let imgUrl = "https://picsum.photos/1920/1081";
+let imgUrl2 = "https://picsum.photos/1920/1082";
 
 class Mixtape extends Component {
   constructor() {
     super();
     this.state = {
       selectedMixtape: null,
+      backgroundImage: "imgUrl",
+      allBackgrounds: [],
       currentMessage: "",
       currentTrack: "",
       activeDrags: 0,
@@ -29,6 +31,20 @@ class Mixtape extends Component {
       }
     };
   }
+
+  fetchBackgrounds = () => {
+    fetch("https://picsum.photos/v2/list")
+      .then(resp => resp.json())
+      .then(backgrounds => {
+        this.setState({ allBackgrounds: backgrounds });
+      });
+  };
+
+  randomImage = () => {
+    let randomNumber = Math.round(Math.random() * 29);
+    let backgroundURL = this.state.allBackgrounds[randomNumber].download_url;
+    this.setState({ backgroundImage: backgroundURL });
+  };
 
   handleDrag = (e, ui) => {
     const { x, y } = this.state.deltaPosition;
@@ -86,6 +102,7 @@ class Mixtape extends Component {
 
   componentDidMount() {
     this.fetchMixtapes(this.props.location.pathname);
+    this.fetchBackgrounds();
   }
 
   fetchMixtapes = id => {
@@ -118,7 +135,10 @@ class Mixtape extends Component {
         </div>
       );
     return (
-      <div className="bg">
+      <div
+        className="bg"
+        style={{ backgroundImage: `url(${this.state.backgroundImage})` }}
+      >
         <Grid container spacing={3}>
           <Draggable {...dragHandlers}>
             <Grid item xs={3}>
@@ -149,6 +169,9 @@ class Mixtape extends Component {
               </div>
             </Grid>
           </Draggable>
+          <button onClick={this.randomImage} className="bg_button">
+            hello
+          </button>
           <a
             href={
               "https://open.spotify.com/playlist/" +
@@ -158,7 +181,7 @@ class Mixtape extends Component {
             rel="noopener noreferrer"
           >
             <img
-              class="spotify_button"
+              className="spotify_button"
               src="http://scubaofficial.com/wp-content/uploads/2018/10/Listen-on-Spotify-badge-button.png"
             ></img>
           </a>

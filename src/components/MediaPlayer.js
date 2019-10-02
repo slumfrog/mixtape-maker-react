@@ -14,7 +14,6 @@ export default class App extends React.Component {
 
   mappedTracks = () => {
     const playlist = this.props.selectedMixtape[0].tracks;
-    debugger;
 
     const tracks = playlist.map(track => ({
       name: track.name,

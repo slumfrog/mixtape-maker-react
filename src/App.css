@@ -741,3 +741,11 @@ body {
   right: 16px;
   font-size: 18px;
 }
+
+.bg_button {
+  width: 200px;
+  position: absolute;
+  bottom: 100px;
+  right: 16px;
+  font-size: 18px;
+}
