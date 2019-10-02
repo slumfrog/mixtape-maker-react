@@ -22,7 +22,8 @@ class Tape extends React.Component {
   }
 
   handleOnChange(event) {
-    return this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value });
+    this.props.handleTapeColour(this.state.value);
   }
 
   render() {

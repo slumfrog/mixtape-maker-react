@@ -18,7 +18,7 @@ class CreateMixtape extends Component {
       selectedPlaylist: [],
       personalMessage: "",
       selectedPlaylistID: null,
-      tapeColor: ""
+      tapeColour: "/static/media/tape_green.def93a51.png"
     };
   }
 
@@ -37,6 +37,11 @@ class CreateMixtape extends Component {
     this.setState({
       [name]: value
     });
+  };
+
+  handleTapeColour = event => {
+    const tapeColour = event;
+    this.setState({ tapeColour });
   };
 
   handleTrackComment = (track, event) => {
@@ -127,6 +132,7 @@ class CreateMixtape extends Component {
           name: this.state.tapeText,
           personal_message: this.state.personalMessage,
           mixtape_id: this.state.selectedPlaylistID,
+          mixtape_colour: this.state.tapeColour,
           tracks: this.state.finalMixtape
         }
       })
@@ -142,6 +148,7 @@ class CreateMixtape extends Component {
               handleTapeText={this.handleTapeText}
               tapeImage={this.state.tapeImage}
               tapeText={this.state.tapeText}
+              handleTapeColour={this.handleTapeColour}
             />
             <PersonalMessage
               handlePersonalMessage={this.handlePersonalMessage}
