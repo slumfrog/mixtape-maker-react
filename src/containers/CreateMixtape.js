@@ -17,7 +17,8 @@ class CreateMixtape extends Component {
       tapeText: "",
       selectedPlaylist: [],
       personalMessage: "",
-      selectedPlaylistID: null
+      selectedPlaylistID: null,
+      tapeColor: ""
     };
   }
 

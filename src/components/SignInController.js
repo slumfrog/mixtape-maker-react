@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import NavBar from "../components/NavBar";
+import { VisualPicker } from "react-rainbow-components";
 
 const SignInController = ({ user, signUp, logIn, logOut, profile }) => {
   const [member, setMember] = useState(true);
