@@ -10,7 +10,7 @@ function Home({ user }) {
         <Grid item>
           <div className="text-pop-up-top">Welcome to MixtapeMaker</div>
           <div className="home-buttons">
-            <Link to="/create">
+            <Link style={{ textDecoration: "none" }} to="/create">
               <Button
                 shaded
                 label="Create a Mixtape"
@@ -18,7 +18,7 @@ function Home({ user }) {
                 className="rainbow-m-around_medium"
               />
             </Link>
-            <Link to="/mixtapes">
+            <Link style={{ textDecoration: "none" }} to="/mixtapes">
               <Button
                 shaded
                 label="View your Mixtapes"

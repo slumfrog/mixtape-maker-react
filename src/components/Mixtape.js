@@ -8,6 +8,7 @@ import { Button } from "react-rainbow-components";
 import { Link } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 import TapeLiner from "../components/TapeLiner";
+import { withRouter } from "react-router-dom";
 
 class Mixtape extends Component {
   constructor() {
@@ -111,7 +112,9 @@ class Mixtape extends Component {
     })
       .then(resp => resp.json())
       .then(mixtape => {
-        this.setState({ selectedMixtape: mixtape });
+        mixtape.length > 0
+          ? this.setState({ selectedMixtape: mixtape })
+          : this.props.history.push("/");
       });
   };
 
@@ -195,7 +198,7 @@ class Mixtape extends Component {
   }
 }
 
-export default Mixtape;
+export default withRouter(Mixtape);
 
 // <div class="areabg">
 //   <ul class="circles">

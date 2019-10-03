@@ -9,6 +9,7 @@ import tapeBlack from "../tape2.png";
 import tapeRed from "../tape_red.png";
 import tapeGreen from "../tape_green.png";
 import TextTrackArea from "../components/TextTrackArea";
+import { withRouter } from "react-router-dom";
 
 let imgUrl =
   "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/470470/5107c1158cfe9f8552383ff5490c793ae14c34c9.jpg";
@@ -122,11 +123,11 @@ class CreateMixtape extends Component {
   };
 
   saveMixtape = () => {
-    this.postMixtape();
+    this.postMixtape().then(this.props.history.push("/mixtapes"));
   };
 
   postMixtape = () => {
-    fetch("http://localhost:3000/mixtapes", {
+    return fetch("http://localhost:3000/mixtapes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -158,7 +159,7 @@ class CreateMixtape extends Component {
             />
             <PersonalMessage
               handlePersonalMessage={this.handlePersonalMessage}
-            />
+            />{" "}
             <Button
               shaded
               label="Save Mixtape"
@@ -215,4 +216,4 @@ class CreateMixtape extends Component {
 //   backgroundRepeat: "no-repeat"
 // }}
 
-export default CreateMixtape;
+export default withRouter(CreateMixtape);
