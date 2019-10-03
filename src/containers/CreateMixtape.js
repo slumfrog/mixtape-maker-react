@@ -5,6 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import { Button } from "react-rainbow-components";
 import ScrollArea from "react-scrollbar";
 import Tracks2 from "../components/Tracks2";
+import tapeBlack from "../tape2.png";
+import tapeRed from "../tape_red.png";
+import tapeGreen from "../tape_green.png";
+import TextTrackArea from "../components/TextTrackArea";
 
 let imgUrl =
   "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/470470/5107c1158cfe9f8552383ff5490c793ae14c34c9.jpg";
@@ -18,7 +22,7 @@ class CreateMixtape extends Component {
       selectedPlaylist: [],
       personalMessage: "",
       selectedPlaylistID: null,
-      tapeColour: "/static/media/tape_green.def93a51.png"
+      tapeColour: tapeBlack
     };
   }
 
@@ -40,8 +44,10 @@ class CreateMixtape extends Component {
   };
 
   handleTapeColour = event => {
-    const tapeColour = event;
-    this.setState({ tapeColour });
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   handleTrackComment = (track, event) => {
@@ -128,11 +134,11 @@ class CreateMixtape extends Component {
       },
       body: JSON.stringify({
         mixtape: {
-          user_id: this.props.user.id, // get user id from token
+          user_id: this.props.user.id,
           name: this.state.tapeText,
           personal_message: this.state.personalMessage,
           mixtape_id: this.state.selectedPlaylistID,
-          mixtape_colour: this.state.tapeColour,
+          tape_colour: this.state.tapeColour,
           tracks: this.state.finalMixtape
         }
       })
@@ -168,6 +174,7 @@ class CreateMixtape extends Component {
               contentClassName="content2"
               horizontal={false}
             >
+              <TextTrackArea />
               <Tracks2
                 selectedPlaylist={this.state.selectedPlaylist}
                 handleTrackComment={this.handleTrackComment}
@@ -181,21 +188,22 @@ class CreateMixtape extends Component {
 }
 
 // add this to have the fully animated background
-
-// <div class="area">
-//   <ul class="circles">
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//     <li></li>
-//   </ul>
-// </div>;
+{
+  /* <div class="areabg">
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div> */
+}
 
 // Add this to div to bring in the cool background
 

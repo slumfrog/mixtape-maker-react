@@ -35,7 +35,7 @@ class Tracks2 extends Component {
         </div>
       );
     return (
-      <div>
+      <div style={{ padding: "0 0 80px 0" }}>
         {this.props.selectedPlaylist.map(track => (
           <div class="tracks-card tracks-card-1 ">
             <h2>{track.name}</h2>

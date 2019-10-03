@@ -167,7 +167,7 @@ class Mixtape extends Component {
             </Grid>
           </Draggable>
           <button onClick={this.randomImage} className="bg_button">
-            hello
+            Change background
           </button>
           <a
             href={
@@ -189,3 +189,18 @@ class Mixtape extends Component {
 }
 
 export default Mixtape;
+
+// <div class="areabg">
+//   <ul class="circles">
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//     <li></li>
+//   </ul>
+// </div>

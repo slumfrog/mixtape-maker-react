@@ -8,10 +8,9 @@ const PersonalMessage = props => {
 
   return (
     <>
-      <div className="create_font">
+      <div className>
         <Textarea
           id="example-textarea-1"
-          label="Enter a personal message for your receipient"
           name="personalMessage"
           rows={2}
           placeholder="I made you this mixtape because..."

@@ -74,7 +74,7 @@ export default class App extends React.Component {
       loop: "all",
       volume: 0.7,
       mutex: true,
-      listFolded: false,
+      listFolded: true,
       listMaxHeight: 200,
       lrcType: 3,
       audio: this.state.tracks

@@ -14,7 +14,7 @@ const handleServerError = response => {
 
 const saveToken = data => {
   localStorage.setItem("token", data.token);
-  return { ...data.user, profile_pic: data.profile_pic };
+  return data.user;
 };
 
 const constructHeaders = (moreHeaders = {}) => ({

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Spinner } from "react-rainbow-components";
-import tapeImage from "../tape2.png";
+import tapeBlack from "../tape2.png";
+import tapeRed from "../tape_red.png";
+import tapeGreen from "../tape_green.png";
 
 class Gallery extends Component {
   constructor() {
@@ -24,21 +26,21 @@ class Gallery extends Component {
         </div>
       );
     return (
-      <div>
+      <div className="mixtapes">
         {this.props.mixtapes.map(mixtape => (
           <>
             <div
               onClick={() => this.props.selectMixtape(mixtape)}
               style={{ cursor: "pointer" }}
-              className="mixtape-card"
+              className="mixtape-card mixtape-card-1"
               key={mixtape.id}
             >
-              <div width="100%" class="mixtape">
+              <div width="100%" class="mixtape mixtape-image">
                 <img
                   draggable="false"
                   alt="mixtape"
                   width="100%"
-                  src={tapeImage}
+                  src={mixtape.tape_colour}
                 ></img>
                 <h2 className="top">{mixtape.name}</h2>
               </div>

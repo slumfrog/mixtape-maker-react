@@ -7,6 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
@@ -14,23 +15,6 @@ code {
     monospace;
 }
 
-.text-wrap {
-  word-wrap: break-word;
-}
 
-.bg {
-  background-image: url("https://wallpaperplay.com/walls/full/7/f/4/47283.jpg");
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bg2 {
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 /* change background button */

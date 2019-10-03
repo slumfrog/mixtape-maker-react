@@ -82,7 +82,6 @@ class NavbarPage extends Component {
                   />
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
-                  <MDBDropdownItem href="#!">My account</MDBDropdownItem>
                   <MDBDropdownItem
                     user={this.props.user}
                     onClick={this.props.logOut}
