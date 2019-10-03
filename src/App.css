@@ -324,6 +324,85 @@
 
 /* static tape styling end */
 
+/* tape text styling */
+
+.tape_liner {
+  padding-top: 0px;
+  position: relative;
+  width: 600px;
+  margin: auto;
+}
+
+.tape_liner > img {
+  width: 100%;
+}
+
+.tape_liner > h2 {
+  position: absolute;
+  width: 70%;
+  text-align: center;
+  left: 47%;
+  transform: translateX(-50%);
+  margin: 15px 12px;
+  padding: 0 5px;
+  font-family: "Mansalva", cursive;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  color: 000000;
+  letter-spacing: 1px;
+}
+
+.tape_liner > .top {
+  top: 180px;
+}
+
+
+/* tape text styling end */
+
+/* tape_liner styling */
+
+.tape2 {
+  padding-top: 55px;
+  position: relative;
+  width: 600px;
+  margin: auto;
+}
+
+.tape2 > img {
+  width: 100%;
+}
+
+.tape2 > h2 {
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 15px 12px;
+  padding: 0 5px;
+  font-family: "Mansalva", cursive;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  color: 000000;
+  letter-spacing: 1px;
+}
+
+.tape2 > .top {
+  top: 88px;
+}
+
+.tape2 > .over {
+  position: absolute;
+  top: 13.5%;
+  left: 8.5%;
+}
+
+.tape2 > .topShowPage {
+  top: 64px;
+}
+
+/* tape_liner styling end */
+
 /* mixtape text styling */
 
 .mixtape {
@@ -750,6 +829,16 @@ body {
   -webkit-animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
   animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.home-buttons {
+  font-weight: bold;
+  height: 100px;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0px 0 0 -230px;
 }
 
 /* Mixtape Maker Intro KeyFrames End */

@@ -7,6 +7,7 @@ import TapeMixtape from "../components/TapeMixtape";
 import { Button } from "react-rainbow-components";
 import { Link } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
+import TapeLiner from "../components/TapeLiner";
 
 class Mixtape extends Component {
   constructor() {
@@ -143,8 +144,22 @@ class Mixtape extends Component {
             </Grid>
           </Draggable>
           <Draggable {...dragHandlers}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
+              <TapeLiner selectedMixtape={this.state.selectedMixtape} />
+            </Grid>
+          </Draggable>
+          <Draggable {...dragHandlers}>
+            <Grid item xs={3}>
               <TapeMixtape selectedMixtape={this.state.selectedMixtape} />
+            </Grid>
+          </Draggable>
+          <Draggable {...dragHandlers}>
+            <Grid item xs={3}>
+              <div>
+                <div className="text-pop-up-top">
+                  {this.state.currentMessage}
+                </div>
+              </div>
             </Grid>
           </Draggable>
           <Draggable {...dragHandlers}>
@@ -157,15 +172,7 @@ class Mixtape extends Component {
               </div>
             </Grid>
           </Draggable>
-          <Draggable {...dragHandlers}>
-            <Grid item xs={12}>
-              <div>
-                <div className="text-pop-up-top">
-                  {this.state.currentMessage}
-                </div>
-              </div>
-            </Grid>
-          </Draggable>
+
           <button onClick={this.randomImage} className="bg_button">
             Change background
           </button>
